@@ -1,0 +1,28 @@
+{
+  "fidelizacion2App": {
+    "productoCaja": {
+      "home": {
+        "title": "Producto Cajas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Producto Caja",
+        "createOrEditLabel": "Create or edit a Producto Caja",
+        "notFound": "No Producto Cajas found"
+      },
+      "created": "A new Producto Caja is created with identifier {{ param }}",
+      "updated": "A Producto Caja is updated with identifier {{ param }}",
+      "deleted": "A Producto Caja is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Producto Caja {{ id }}?"
+      },
+      "detail": {
+        "title": "Producto Caja"
+      },
+      "id": "ID",
+      "cantidad": "Cantidad",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "producto": "Producto",
+      "caja": "Caja"
+    }
+  }
+}

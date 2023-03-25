@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014258",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "asociado",
+  "fields": [
+    {
+      "fieldName": "identificadorGeneral",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Asociado",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "documento",
+      "otherEntityRelationshipName": "asociado",
+      "ownerSide": true,
+      "relationshipName": "documento",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "asociado",
+      "relationshipName": "venta",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "asociadoClub",
+      "otherEntityRelationshipName": "asociado",
+      "relationshipName": "asociadoClub",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

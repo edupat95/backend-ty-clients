@@ -1,0 +1,28 @@
+{
+  "fidelizacion2App": {
+    "productoDeposito": {
+      "home": {
+        "title": "Producto Depositos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Producto Deposito",
+        "createOrEditLabel": "Crear o editar Producto Deposito",
+        "notFound": "Ningún Producto Depositos encontrado"
+      },
+      "created": "Un nuevo Producto Deposito ha sido creado con el identificador {{ param }}",
+      "updated": "Un Producto Deposito ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Producto Deposito ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Producto Deposito {{ id }}?"
+      },
+      "detail": {
+        "title": "Producto Deposito"
+      },
+      "id": "ID",
+      "cantidad": "Cantidad",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "deposito": "Deposito",
+      "producto": "Producto"
+    }
+  }
+}

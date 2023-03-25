@@ -1,0 +1,28 @@
+{
+  "fidelizacion2App": {
+    "registrador": {
+      "home": {
+        "title": "Registradors",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Registrador",
+        "createOrEditLabel": "Crear o editar Registrador",
+        "notFound": "Ningún Registradors encontrado"
+      },
+      "created": "Un nuevo Registrador ha sido creado con el identificador {{ param }}",
+      "updated": "Un Registrador ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Registrador ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Registrador {{ id }}?"
+      },
+      "detail": {
+        "title": "Registrador"
+      },
+      "id": "ID",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "trabajador": "Trabajador",
+      "asociadoClub": "Asociado Club"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014250",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cajero",
+  "fields": [
+    {
+      "fieldName": "plataDeCambio",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "creadDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "not an ignored comment",
+  "jpaMetamodelFiltering": false,
+  "name": "Cajero",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "trabajador",
+      "otherEntityRelationshipName": "cajero",
+      "ownerSide": true,
+      "relationshipName": "trabajador",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "cajero",
+      "relationshipName": "venta",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "caja",
+      "otherEntityRelationshipName": "cajero",
+      "relationshipName": "caja",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

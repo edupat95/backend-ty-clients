@@ -1,0 +1,11 @@
+id;name;estado;created_date;updated_date;club_id
+1;streamline Rican;true;2023-03-02T22:49:39;2023-03-02T06:11:42;1
+2;Apartamento THX Asociado;false;2023-03-02T13:50:20;2023-03-02T17:12:08;2
+3;input infrastructures;false;2023-03-02T11:57:21;2023-03-02T09:42:32;2
+4;Regional Granito;false;2023-03-02T04:26:25;2023-03-02T23:16:25;2
+5;Mercados Pelota;true;2023-03-02T21:18:43;2023-03-02T22:32:00;1
+6;1080p cross-platform AI;true;2023-03-02T04:51:12;2023-03-02T05:07:40;2
+7;Barranco Agente Granito;false;2023-03-02T21:32:22;2023-03-02T14:01:10;2
+8;Valenciana Valenciana Blanco;false;2023-03-02T13:13:59;2023-03-02T07:36:56;2
+9;Fantástico Increible Azul;true;2023-03-02T08:04:23;2023-03-02T16:47:00;2
+10;Coche index;true;2023-03-02T09:38:31;2023-03-02T12:51:03;1

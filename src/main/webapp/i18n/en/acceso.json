@@ -1,0 +1,30 @@
+{
+  "fidelizacion2App": {
+    "acceso": {
+      "home": {
+        "title": "Accesos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Acceso",
+        "createOrEditLabel": "Create or edit a Acceso",
+        "notFound": "No Accesos found"
+      },
+      "created": "A new Acceso is created with identifier {{ param }}",
+      "updated": "A Acceso is updated with identifier {{ param }}",
+      "deleted": "A Acceso is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Acceso {{ id }}?"
+      },
+      "detail": {
+        "title": "Acceso"
+      },
+      "id": "ID",
+      "costoPuntos": "Costo Puntos",
+      "fechaCanje": "Fecha Canje",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "asociado": "Asociado",
+      "evento": "Evento"
+    }
+  }
+}

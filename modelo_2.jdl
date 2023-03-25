@@ -1,0 +1,202 @@
+entity AdminClub{
+	estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Cliente{
+	mail String required
+    phone String required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Registrador{
+	estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Trabajador {
+	sueldo Long
+	reputacion Long
+    descripcion String
+    fechaIngreso ZonedDateTime required
+	estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Cajero {
+	plataDeCambio Long
+    estado Boolean required
+    creadDate Instant
+    updatedDate Instant
+}
+
+entity Caja {
+	nombre String
+    estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Producto {
+	nombre String required
+    precio Long required
+	costoPuntos Long required
+    puntosRecompensa Long required
+    descripcion String
+    estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+
+entity Venta {
+	costoTotal Long required
+    costoTotalPuntos Long required
+    identificadorTicket UUID required
+    entregado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity ProductoVenta {
+	costoTotal Long
+	costoTotalPuntos Long
+	cantidad Long
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity ProductoCaja{
+	cantidad Long
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity ProductoDeposito{
+	cantidad Long
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Club {
+	nombre String required
+	direccion String
+    estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Asociado {
+	identificadorGeneral UUID
+	estado Boolean
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity AsociadoClub{
+	identificador UUID required
+    fechaAsociacion Instant
+    puntosClub Long
+    estado Boolean //el administrador del club puede desactivar o activar a un socio
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Evento{
+	fechaEvento Instant
+    fechaCreacion Instant
+    estado Boolean required
+    direccion String
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Deposito {
+	name String
+    estado Boolean
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Documento{
+	numeroTramite Long
+    apellidos String
+    nombres String
+    sexo String
+    numeroDni Long
+    ejemplar String
+    nacimiento LocalDate //no tiene horario
+    fechaEmision LocalDate //no tiene horario
+    inicioFinCuil Integer
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity Acceso{
+	costoPuntos Long
+    fechaCanje Instant
+    estado Boolean required
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity FormaPago{
+	name String
+    createdDate Instant
+    updatedDate Instant
+}
+
+entity TipoProducto{
+	name String
+}
+
+relationship OneToOne {
+	Trabajador{user(id) required} to User // Un trabajador es un usuario
+    Cajero{trabajador(id) required} to Trabajador // Un cajero es un trabajador
+	Asociado{documento(id) required} to Documento //un asociado tiene un documento
+    Documento{user(id)} to User //un usuario puede o no tener relacionado un documento
+	Club{adminClub(id) required} to AdminClub //El club tiene un administrador si o si, este seria el primer administrador 
+	Acceso{asociado(id) required} to Asociado // El acceso le pertenece a un asociado
+    Registrador{trabajador(id) required} to Trabajador //el registrador es un trabajador
+    Cliente{user(id) required} to User // el cliente es un usuario
+	Cliente{documento(id)} to Documento //puede estar o no relacionado con un documento
+	AdminClub{user(id) required} to User //El admin del club es un Usuario
+	Venta {formaPago(id)} to FormaPago  // Muchas ventas tiene una forma de pago
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Club to FormaPago{club(id) required} //Un club tiene muchas formas de pago.
+	Club to Caja{club(id) required} //la caja le pertenece a un club. y un club puede tener muchas cajas.
+	Club to Deposito{club(id) required} //El Deposito pertenece a un club.
+    Club to Trabajador{club(id) required} //el trabajador trabaja para un club.
+	Caja to Cajero{caja(id)} //la caja puede tener o no cajeros.
+	Deposito to ProductoDeposito{deposito(id) required} // Los productos estan en un depocito.
+    Venta to ProductoVenta{venta(id) required} // muchas ventas pueden tener muchos productos.
+    Producto to ProductoVenta{producto(id) required} //un producto puede estar en muchas ventas.
+    Cajero to Venta{cajero(id) required} // un cajero vende/canjea.
+    Asociado to Venta{asociado(id)} // la compra/canje la hace un asociado.
+    Asociado to AsociadoClub{asociado(id) required} // un asociaciodo puede asociarse a muchos clubes.
+    Club to AsociadoClub{club(id) required} //un club tiene muchos asociados.
+    Registrador to AsociadoClub{registrador(id)} // no requerido porque el usario se puede asociar por la web sin necesidad de un registrador.
+	Evento to Acceso{evento(id) required} // el accesos pertenece a un evento.
+	AdminClub to Evento{adminClub(id) required} //al evento lo crea un AdminClub.
+    Club to Evento{club(id) required} // El evento pertenece a un Club.
+	Producto to ProductoCaja{producto(id) required} // un producto puede estar en muchas cajas. 
+    Producto to ProductoDeposito{producto(id) required} // Un porducto puede estar en muchos depocitos 
+    Caja to ProductoCaja{caja(id) required} //Una caja puede tener muchos productos
+	AdminClub to Trabajador{adminClub(id) required} //un admin del club crea trabajadores
+    Club to FormaPago{club(id) required}
+    Club to Producto{club(id)} // Muchos productos pertenece a un Club
+	TipoProducto to Producto {tipoProducto(id)}// mucho productos tienen una forma de pago.
+} 

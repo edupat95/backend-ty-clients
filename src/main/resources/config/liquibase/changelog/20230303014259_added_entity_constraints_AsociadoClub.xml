@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity AsociadoClub.
+    -->
+    <changeSet id="20230303014259-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="asociado_id"
+                                 baseTableName="asociado_club"
+                                 constraintName="fk_asociado_club__asociado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="asociado"/>
+
+        <addForeignKeyConstraint baseColumnNames="club_id"
+                                 baseTableName="asociado_club"
+                                 constraintName="fk_asociado_club__club_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="club"/>
+
+        <addForeignKeyConstraint baseColumnNames="registrador_id"
+                                 baseTableName="asociado_club"
+                                 constraintName="fk_asociado_club__registrador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="registrador"/>
+    </changeSet>
+</databaseChangeLog>

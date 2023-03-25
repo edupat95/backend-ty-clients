@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Trabajador.
+    -->
+    <changeSet id="20230303014249-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="trabajador"
+                                 constraintName="fk_trabajador__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="club_id"
+                                 baseTableName="trabajador"
+                                 constraintName="fk_trabajador__club_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="club"/>
+
+        <addForeignKeyConstraint baseColumnNames="admin_club_id"
+                                 baseTableName="trabajador"
+                                 constraintName="fk_trabajador__admin_club_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="admin_club"/>
+    </changeSet>
+</databaseChangeLog>

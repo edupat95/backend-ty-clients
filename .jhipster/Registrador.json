@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014248",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "registrador",
+  "fields": [
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Registrador",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "trabajador",
+      "otherEntityRelationshipName": "registrador",
+      "ownerSide": true,
+      "relationshipName": "trabajador",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "asociadoClub",
+      "otherEntityRelationshipName": "registrador",
+      "relationshipName": "asociadoClub",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

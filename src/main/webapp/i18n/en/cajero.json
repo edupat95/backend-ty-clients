@@ -1,0 +1,30 @@
+{
+  "fidelizacion2App": {
+    "cajero": {
+      "home": {
+        "title": "Cajeros",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cajero",
+        "createOrEditLabel": "Create or edit a Cajero",
+        "notFound": "No Cajeros found"
+      },
+      "created": "A new Cajero is created with identifier {{ param }}",
+      "updated": "A Cajero is updated with identifier {{ param }}",
+      "deleted": "A Cajero is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cajero {{ id }}?"
+      },
+      "detail": {
+        "title": "Cajero"
+      },
+      "id": "ID",
+      "plataDeCambio": "Plata De Cambio",
+      "estado": "Estado",
+      "creadDate": "Cread Date",
+      "updatedDate": "Updated Date",
+      "trabajador": "Trabajador",
+      "venta": "Venta",
+      "caja": "Caja"
+    }
+  }
+}

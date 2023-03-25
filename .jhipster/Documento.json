@@ -1,0 +1,69 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014302",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "documento",
+  "fields": [
+    {
+      "fieldName": "numeroTramite",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "apellidos",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombres",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numeroDni",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ejemplar",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nacimiento",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "fechaEmision",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "inicioFinCuil",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Documento",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "documento",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014301",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deposito",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Deposito",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "productoDeposito",
+      "otherEntityRelationshipName": "deposito",
+      "relationshipName": "productoDeposito",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "deposito",
+      "relationshipName": "club",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,3 @@
+id;nombre;direccion;estado;created_date;updated_date;admin_club_id
+1;Atún;Electrónica port;false;2023-03-02T12:36:33;2023-03-02T17:42:22;1
+2;Producto Account Creativo;Analista;true;2023-03-03T00:04:55;2023-03-02T11:21:00;2

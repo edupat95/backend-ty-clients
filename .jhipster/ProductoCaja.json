@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014255",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto_caja",
+  "fields": [
+    {
+      "fieldName": "cantidad",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductoCaja",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "productoCaja",
+      "relationshipName": "producto",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "caja",
+      "otherEntityRelationshipName": "productoCaja",
+      "relationshipName": "caja",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

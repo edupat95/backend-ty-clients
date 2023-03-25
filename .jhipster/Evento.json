@@ -1,0 +1,64 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014300",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "evento",
+  "fields": [
+    {
+      "fieldName": "fechaEvento",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaCreacion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "direccion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Evento",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "acceso",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "acceso",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "adminClub",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "adminClub",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "evento",
+      "relationshipName": "club",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

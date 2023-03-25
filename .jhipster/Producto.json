@@ -1,0 +1,87 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014252",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "precio",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "costoPuntos",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "puntosRecompensa",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Task entity.\\n@author The JHipster team.",
+  "jpaMetamodelFiltering": false,
+  "name": "Producto",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "productoVenta",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "productoVenta",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productoCaja",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "productoCaja",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productoDeposito",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "productoDeposito",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "club",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "tipoProducto",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "tipoProducto",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

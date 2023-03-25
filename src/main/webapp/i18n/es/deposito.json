@@ -1,0 +1,29 @@
+{
+  "fidelizacion2App": {
+    "deposito": {
+      "home": {
+        "title": "Depositos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Deposito",
+        "createOrEditLabel": "Crear o editar Deposito",
+        "notFound": "Ningún Depositos encontrado"
+      },
+      "created": "Un nuevo Deposito ha sido creado con el identificador {{ param }}",
+      "updated": "Un Deposito ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Deposito ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Deposito {{ id }}?"
+      },
+      "detail": {
+        "title": "Deposito"
+      },
+      "id": "ID",
+      "name": "Name",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "productoDeposito": "Producto Deposito",
+      "club": "Club"
+    }
+  }
+}

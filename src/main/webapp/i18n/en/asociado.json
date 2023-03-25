@@ -1,0 +1,30 @@
+{
+  "fidelizacion2App": {
+    "asociado": {
+      "home": {
+        "title": "Asociados",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Asociado",
+        "createOrEditLabel": "Create or edit a Asociado",
+        "notFound": "No Asociados found"
+      },
+      "created": "A new Asociado is created with identifier {{ param }}",
+      "updated": "A Asociado is updated with identifier {{ param }}",
+      "deleted": "A Asociado is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Asociado {{ id }}?"
+      },
+      "detail": {
+        "title": "Asociado"
+      },
+      "id": "ID",
+      "identificadorGeneral": "Identificador General",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "documento": "Documento",
+      "venta": "Venta",
+      "asociadoClub": "Asociado Club"
+    }
+  }
+}

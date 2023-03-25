@@ -1,0 +1,32 @@
+{
+  "fidelizacion2App": {
+    "asociadoClub": {
+      "home": {
+        "title": "Asociado Clubs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Asociado Club",
+        "createOrEditLabel": "Create or edit a Asociado Club",
+        "notFound": "No Asociado Clubs found"
+      },
+      "created": "A new Asociado Club is created with identifier {{ param }}",
+      "updated": "A Asociado Club is updated with identifier {{ param }}",
+      "deleted": "A Asociado Club is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Asociado Club {{ id }}?"
+      },
+      "detail": {
+        "title": "Asociado Club"
+      },
+      "id": "ID",
+      "identificador": "Identificador",
+      "fechaAsociacion": "Fecha Asociacion",
+      "puntosClub": "Puntos Club",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "asociado": "Asociado",
+      "club": "Club",
+      "registrador": "Registrador"
+    }
+  }
+}

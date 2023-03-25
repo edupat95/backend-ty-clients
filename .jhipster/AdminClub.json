@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014246",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "admin_club",
+  "fields": [
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AdminClub",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "adminClub",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "evento",
+      "otherEntityRelationshipName": "adminClub",
+      "relationshipName": "evento",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "trabajador",
+      "otherEntityRelationshipName": "adminClub",
+      "relationshipName": "trabajador",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

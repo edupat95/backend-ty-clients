@@ -1,0 +1,37 @@
+{
+  "fidelizacion2App": {
+    "club": {
+      "home": {
+        "title": "Clubs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Club",
+        "createOrEditLabel": "Create or edit a Club",
+        "notFound": "No Clubs found"
+      },
+      "created": "A new Club is created with identifier {{ param }}",
+      "updated": "A Club is updated with identifier {{ param }}",
+      "deleted": "A Club is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Club {{ id }}?"
+      },
+      "detail": {
+        "title": "Club"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "direccion": "Direccion",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "adminClub": "Admin Club",
+      "tipoProducto": "Tipo Producto",
+      "formaPago": "Forma Pago",
+      "caja": "Caja",
+      "deposito": "Deposito",
+      "trabajador": "Trabajador",
+      "asociadoClub": "Asociado Club",
+      "evento": "Evento",
+      "producto": "Producto"
+    }
+  }
+}

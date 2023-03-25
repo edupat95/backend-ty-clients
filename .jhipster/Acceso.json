@@ -1,0 +1,55 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014303",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "acceso",
+  "fields": [
+    {
+      "fieldName": "costoPuntos",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fechaCanje",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Acceso",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "asociado",
+      "otherEntityRelationshipName": "acceso",
+      "ownerSide": true,
+      "relationshipName": "asociado",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "evento",
+      "otherEntityRelationshipName": "acceso",
+      "relationshipName": "evento",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

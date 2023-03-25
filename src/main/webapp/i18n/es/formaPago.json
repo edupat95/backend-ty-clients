@@ -1,0 +1,29 @@
+{
+  "fidelizacion2App": {
+    "formaPago": {
+      "home": {
+        "title": "Forma Pagos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Forma Pago",
+        "createOrEditLabel": "Crear o editar Forma Pago",
+        "notFound": "Ningún Forma Pagos encontrado"
+      },
+      "created": "Un nuevo Forma Pago ha sido creado con el identificador {{ param }}",
+      "updated": "Un Forma Pago ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Forma Pago ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Forma Pago {{ id }}?"
+      },
+      "detail": {
+        "title": "Forma Pago"
+      },
+      "id": "ID",
+      "name": "Name",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "venta": "Venta",
+      "club": "Club"
+    }
+  }
+}

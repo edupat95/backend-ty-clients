@@ -1,0 +1,30 @@
+{
+  "fidelizacion2App": {
+    "productoVenta": {
+      "home": {
+        "title": "Producto Ventas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Producto Venta",
+        "createOrEditLabel": "Crear o editar Producto Venta",
+        "notFound": "Ningún Producto Ventas encontrado"
+      },
+      "created": "Un nuevo Producto Venta ha sido creado con el identificador {{ param }}",
+      "updated": "Un Producto Venta ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Producto Venta ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Producto Venta {{ id }}?"
+      },
+      "detail": {
+        "title": "Producto Venta"
+      },
+      "id": "ID",
+      "costoTotal": "Costo Total",
+      "costoTotalPuntos": "Costo Total Puntos",
+      "cantidad": "Cantidad",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "venta": "Venta",
+      "producto": "Producto"
+    }
+  }
+}

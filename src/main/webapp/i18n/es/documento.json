@@ -1,0 +1,35 @@
+{
+  "fidelizacion2App": {
+    "documento": {
+      "home": {
+        "title": "Documentos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Documento",
+        "createOrEditLabel": "Crear o editar Documento",
+        "notFound": "Ningún Documentos encontrado"
+      },
+      "created": "Un nuevo Documento ha sido creado con el identificador {{ param }}",
+      "updated": "Un Documento ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Documento ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Documento {{ id }}?"
+      },
+      "detail": {
+        "title": "Documento"
+      },
+      "id": "ID",
+      "numeroTramite": "Numero Tramite",
+      "apellidos": "Apellidos",
+      "nombres": "Nombres",
+      "sexo": "Sexo",
+      "numeroDni": "Numero Dni",
+      "ejemplar": "Ejemplar",
+      "nacimiento": "Nacimiento",
+      "fechaEmision": "Fecha Emision",
+      "inicioFinCuil": "Inicio Fin Cuil",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "user": "User"
+    }
+  }
+}

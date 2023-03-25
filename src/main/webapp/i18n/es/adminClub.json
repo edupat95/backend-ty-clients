@@ -1,0 +1,29 @@
+{
+  "fidelizacion2App": {
+    "adminClub": {
+      "home": {
+        "title": "Admin Clubs",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Admin Club",
+        "createOrEditLabel": "Crear o editar Admin Club",
+        "notFound": "Ningún Admin Clubs encontrado"
+      },
+      "created": "Un nuevo Admin Club ha sido creado con el identificador {{ param }}",
+      "updated": "Un Admin Club ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Admin Club ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Admin Club {{ id }}?"
+      },
+      "detail": {
+        "title": "Admin Club"
+      },
+      "id": "ID",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "user": "User",
+      "evento": "Evento",
+      "trabajador": "Trabajador"
+    }
+  }
+}

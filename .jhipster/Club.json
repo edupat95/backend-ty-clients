@@ -1,0 +1,96 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014257",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "club",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "direccion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Club",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "adminClub",
+      "otherEntityRelationshipName": "club",
+      "ownerSide": true,
+      "relationshipName": "adminClub",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "tipoProducto",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "tipoProducto",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "formaPago",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "formaPago",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "caja",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "caja",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "deposito",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "deposito",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "trabajador",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "trabajador",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "asociadoClub",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "asociadoClub",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "evento",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "evento",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "producto",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

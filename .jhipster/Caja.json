@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20230303014251",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "caja",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Caja",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cajero",
+      "otherEntityRelationshipName": "caja",
+      "relationshipName": "cajero",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productoCaja",
+      "otherEntityRelationshipName": "caja",
+      "relationshipName": "productoCaja",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "caja",
+      "relationshipName": "club",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}
