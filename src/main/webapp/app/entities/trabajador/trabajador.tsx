@@ -127,9 +127,6 @@ export const Trabajador = (props: RouteComponentProps<{ url: string }>) => {
                   <th className="hand" onClick={sort('sueldo')}>
                     <Translate contentKey="fidelizacion2App.trabajador.sueldo">Sueldo</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
-                  <th className="hand" onClick={sort('reputacion')}>
-                    <Translate contentKey="fidelizacion2App.trabajador.reputacion">Reputacion</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
                   <th className="hand" onClick={sort('descripcion')}>
                     <Translate contentKey="fidelizacion2App.trabajador.descripcion">Descripcion</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
@@ -167,7 +164,6 @@ export const Trabajador = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                     </td>
                     <td>{trabajador.sueldo}</td>
-                    <td>{trabajador.reputacion}</td>
                     <td>{trabajador.descripcion}</td>
                     <td>
                       {trabajador.fechaIngreso ? <TextFormat type="date" value={trabajador.fechaIngreso} format={APP_DATE_FORMAT} /> : null}

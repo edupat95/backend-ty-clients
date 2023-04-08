@@ -44,6 +44,15 @@
       "relationshipValidateRules": "required"
     },
     {
+      "otherEntityField": "id",
+      "otherEntityName": "planContratado",
+      "otherEntityRelationshipName": "club",
+      "ownerSide": true,
+      "relationshipName": "planContratado",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
       "otherEntityName": "tipoProducto",
       "otherEntityRelationshipName": "club",
       "relationshipName": "tipoProducto",
@@ -89,6 +98,12 @@
       "otherEntityName": "producto",
       "otherEntityRelationshipName": "club",
       "relationshipName": "producto",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "mesa",
+      "otherEntityRelationshipName": "club",
+      "relationshipName": "mesa",
       "relationshipType": "one-to-many"
     }
   ],

@@ -41,6 +41,9 @@
             <column name="forma_pago_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="entregador_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="venta" columnName="created_date" columnDataType="${datetimeType}"/>

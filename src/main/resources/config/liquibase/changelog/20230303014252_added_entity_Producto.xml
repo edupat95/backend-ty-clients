@@ -20,7 +20,10 @@
             <column name="precio" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="costo_puntos" type="bigint">
+            <column name="costo" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="precio_puntos" type="bigint">
                 <constraints nullable="false" />
             </column>
             <column name="puntos_recompensa" type="bigint">
@@ -69,7 +72,8 @@
             <column name="id" type="numeric"/>
             <column name="nombre" type="string"/>
             <column name="precio" type="numeric"/>
-            <column name="costo_puntos" type="numeric"/>
+            <column name="costo" type="numeric"/>
+            <column name="precio_puntos" type="numeric"/>
             <column name="puntos_recompensa" type="numeric"/>
             <column name="descripcion" type="string"/>
             <column name="estado" type="boolean"/>

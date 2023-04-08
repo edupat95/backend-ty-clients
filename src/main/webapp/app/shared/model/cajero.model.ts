@@ -6,6 +6,7 @@ import { ICaja } from 'app/shared/model/caja.model';
 export interface ICajero {
   id?: number;
   plataDeCambio?: number | null;
+  tipo?: number | null;
   estado?: boolean;
   creadDate?: string | null;
   updatedDate?: string | null;

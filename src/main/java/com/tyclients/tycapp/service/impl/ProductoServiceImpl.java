@@ -74,8 +74,8 @@ public class ProductoServiceImpl implements ProductoService {
                 if (producto.getPrecio() != null) {
                     existingProducto.setPrecio(producto.getPrecio());
                 }
-                if (producto.getCostoPuntos() != null) {
-                    existingProducto.setCostoPuntos(producto.getCostoPuntos());
+                if (producto.getPrecioPuntos() != null) {
+                    existingProducto.setPrecioPuntos(producto.getPrecioPuntos());
                 }
                 if (producto.getPuntosRecompensa() != null) {
                     existingProducto.setPuntosRecompensa(producto.getPuntosRecompensa());

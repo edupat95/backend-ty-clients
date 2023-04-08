@@ -24,6 +24,7 @@
       "createdDate": "Created Date",
       "updatedDate": "Updated Date",
       "adminClub": "Admin Club",
+      "planContratado": "Plan Contratado",
       "tipoProducto": "Tipo Producto",
       "formaPago": "Forma Pago",
       "caja": "Caja",
@@ -31,7 +32,8 @@
       "trabajador": "Trabajador",
       "asociadoClub": "Asociado Club",
       "evento": "Evento",
-      "producto": "Producto"
+      "producto": "Producto",
+      "mesa": "Mesa"
     }
   }
 }

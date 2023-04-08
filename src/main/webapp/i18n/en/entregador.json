@@ -1,0 +1,28 @@
+{
+  "fidelizacion2App": {
+    "entregador": {
+      "home": {
+        "title": "Entregadors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Entregador",
+        "createOrEditLabel": "Create or edit a Entregador",
+        "notFound": "No Entregadors found"
+      },
+      "created": "A new Entregador is created with identifier {{ param }}",
+      "updated": "A Entregador is updated with identifier {{ param }}",
+      "deleted": "A Entregador is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Entregador {{ id }}?"
+      },
+      "detail": {
+        "title": "Entregador"
+      },
+      "id": "ID",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "trabajador": "Trabajador",
+      "venta": "Venta"
+    }
+  }
+}

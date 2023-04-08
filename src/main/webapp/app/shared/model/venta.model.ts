@@ -3,6 +3,7 @@ import { IProductoVenta } from 'app/shared/model/producto-venta.model';
 import { ICajero } from 'app/shared/model/cajero.model';
 import { IAsociado } from 'app/shared/model/asociado.model';
 import { IFormaPago } from 'app/shared/model/forma-pago.model';
+import { IEntregador } from 'app/shared/model/entregador.model';
 
 export interface IVenta {
   id?: number;
@@ -16,6 +17,7 @@ export interface IVenta {
   cajero?: ICajero;
   asociado?: IAsociado | null;
   formaPago?: IFormaPago | null;
+  entregador?: IEntregador | null;
 }
 
 export const defaultValue: Readonly<IVenta> = {

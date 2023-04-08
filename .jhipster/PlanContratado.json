@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230402180611",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "plan_contratado",
+  "fields": [
+    {
+      "fieldName": "tiempoContratado",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fechaVencimiento",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PlanContratado",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "plan",
+      "otherEntityRelationshipName": "planContratado",
+      "ownerSide": true,
+      "relationshipName": "plan",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

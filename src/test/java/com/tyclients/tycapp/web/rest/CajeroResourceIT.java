@@ -35,6 +35,9 @@ class CajeroResourceIT {
     private static final Long DEFAULT_PLATA_DE_CAMBIO = 1L;
     private static final Long UPDATED_PLATA_DE_CAMBIO = 2L;
 
+    private static final Integer DEFAULT_TIPO = 1;
+    private static final Integer UPDATED_TIPO = 2;
+
     private static final Boolean DEFAULT_ESTADO = false;
     private static final Boolean UPDATED_ESTADO = true;
 
@@ -70,6 +73,7 @@ class CajeroResourceIT {
     public static Cajero createEntity(EntityManager em) {
         Cajero cajero = new Cajero()
             .plataDeCambio(DEFAULT_PLATA_DE_CAMBIO)
+            .tipo(DEFAULT_TIPO)
             .estado(DEFAULT_ESTADO)
             .creadDate(DEFAULT_CREAD_DATE)
             .updatedDate(DEFAULT_UPDATED_DATE);
@@ -95,6 +99,7 @@ class CajeroResourceIT {
     public static Cajero createUpdatedEntity(EntityManager em) {
         Cajero cajero = new Cajero()
             .plataDeCambio(UPDATED_PLATA_DE_CAMBIO)
+            .tipo(UPDATED_TIPO)
             .estado(UPDATED_ESTADO)
             .creadDate(UPDATED_CREAD_DATE)
             .updatedDate(UPDATED_UPDATED_DATE);
@@ -130,6 +135,7 @@ class CajeroResourceIT {
         assertThat(cajeroList).hasSize(databaseSizeBeforeCreate + 1);
         Cajero testCajero = cajeroList.get(cajeroList.size() - 1);
         assertThat(testCajero.getPlataDeCambio()).isEqualTo(DEFAULT_PLATA_DE_CAMBIO);
+        assertThat(testCajero.getTipo()).isEqualTo(DEFAULT_TIPO);
         assertThat(testCajero.getEstado()).isEqualTo(DEFAULT_ESTADO);
         assertThat(testCajero.getCreadDate()).isEqualTo(DEFAULT_CREAD_DATE);
         assertThat(testCajero.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
@@ -183,6 +189,7 @@ class CajeroResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cajero.getId().intValue())))
             .andExpect(jsonPath("$.[*].plataDeCambio").value(hasItem(DEFAULT_PLATA_DE_CAMBIO.intValue())))
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())))
             .andExpect(jsonPath("$.[*].creadDate").value(hasItem(DEFAULT_CREAD_DATE.toString())))
             .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE.toString())));
@@ -201,6 +208,7 @@ class CajeroResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(cajero.getId().intValue()))
             .andExpect(jsonPath("$.plataDeCambio").value(DEFAULT_PLATA_DE_CAMBIO.intValue()))
+            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()))
             .andExpect(jsonPath("$.creadDate").value(DEFAULT_CREAD_DATE.toString()))
             .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE.toString()));
@@ -227,6 +235,7 @@ class CajeroResourceIT {
         em.detach(updatedCajero);
         updatedCajero
             .plataDeCambio(UPDATED_PLATA_DE_CAMBIO)
+            .tipo(UPDATED_TIPO)
             .estado(UPDATED_ESTADO)
             .creadDate(UPDATED_CREAD_DATE)
             .updatedDate(UPDATED_UPDATED_DATE);
@@ -244,6 +253,7 @@ class CajeroResourceIT {
         assertThat(cajeroList).hasSize(databaseSizeBeforeUpdate);
         Cajero testCajero = cajeroList.get(cajeroList.size() - 1);
         assertThat(testCajero.getPlataDeCambio()).isEqualTo(UPDATED_PLATA_DE_CAMBIO);
+        assertThat(testCajero.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testCajero.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testCajero.getCreadDate()).isEqualTo(UPDATED_CREAD_DATE);
         assertThat(testCajero.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
@@ -317,7 +327,7 @@ class CajeroResourceIT {
         Cajero partialUpdatedCajero = new Cajero();
         partialUpdatedCajero.setId(cajero.getId());
 
-        partialUpdatedCajero.estado(UPDATED_ESTADO).creadDate(UPDATED_CREAD_DATE);
+        partialUpdatedCajero.tipo(UPDATED_TIPO).estado(UPDATED_ESTADO).updatedDate(UPDATED_UPDATED_DATE);
 
         restCajeroMockMvc
             .perform(
@@ -332,9 +342,10 @@ class CajeroResourceIT {
         assertThat(cajeroList).hasSize(databaseSizeBeforeUpdate);
         Cajero testCajero = cajeroList.get(cajeroList.size() - 1);
         assertThat(testCajero.getPlataDeCambio()).isEqualTo(DEFAULT_PLATA_DE_CAMBIO);
+        assertThat(testCajero.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testCajero.getEstado()).isEqualTo(UPDATED_ESTADO);
-        assertThat(testCajero.getCreadDate()).isEqualTo(UPDATED_CREAD_DATE);
-        assertThat(testCajero.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
+        assertThat(testCajero.getCreadDate()).isEqualTo(DEFAULT_CREAD_DATE);
+        assertThat(testCajero.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
     }
 
     @Test
@@ -351,6 +362,7 @@ class CajeroResourceIT {
 
         partialUpdatedCajero
             .plataDeCambio(UPDATED_PLATA_DE_CAMBIO)
+            .tipo(UPDATED_TIPO)
             .estado(UPDATED_ESTADO)
             .creadDate(UPDATED_CREAD_DATE)
             .updatedDate(UPDATED_UPDATED_DATE);
@@ -368,6 +380,7 @@ class CajeroResourceIT {
         assertThat(cajeroList).hasSize(databaseSizeBeforeUpdate);
         Cajero testCajero = cajeroList.get(cajeroList.size() - 1);
         assertThat(testCajero.getPlataDeCambio()).isEqualTo(UPDATED_PLATA_DE_CAMBIO);
+        assertThat(testCajero.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testCajero.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testCajero.getCreadDate()).isEqualTo(UPDATED_CREAD_DATE);
         assertThat(testCajero.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);

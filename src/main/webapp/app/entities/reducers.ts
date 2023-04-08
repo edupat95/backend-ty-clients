@@ -18,6 +18,11 @@ import documento from 'app/entities/documento/documento.reducer';
 import acceso from 'app/entities/acceso/acceso.reducer';
 import formaPago from 'app/entities/forma-pago/forma-pago.reducer';
 import tipoProducto from 'app/entities/tipo-producto/tipo-producto.reducer';
+import mesa from 'app/entities/mesa/mesa.reducer';
+import productoMesa from 'app/entities/producto-mesa/producto-mesa.reducer';
+import entregador from 'app/entities/entregador/entregador.reducer';
+import plan from 'app/entities/plan/plan.reducer';
+import planContratado from 'app/entities/plan-contratado/plan-contratado.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -41,6 +46,11 @@ const entitiesReducers = {
   acceso,
   formaPago,
   tipoProducto,
+  mesa,
+  productoMesa,
+  entregador,
+  plan,
+  planContratado,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

@@ -124,10 +124,17 @@ export const ProductoUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 }}
               />
               <ValidatedField
-                label={translate('fidelizacion2App.producto.costoPuntos')}
-                id="producto-costoPuntos"
-                name="costoPuntos"
-                data-cy="costoPuntos"
+                label={translate('fidelizacion2App.producto.costo')}
+                id="producto-costo"
+                name="costo"
+                data-cy="costo"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('fidelizacion2App.producto.precioPuntos')}
+                id="producto-precioPuntos"
+                name="precioPuntos"
+                data-cy="precioPuntos"
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },

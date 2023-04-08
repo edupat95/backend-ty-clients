@@ -43,11 +43,17 @@ export const ProductoDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{productoEntity.precio}</dd>
           <dt>
-            <span id="costoPuntos">
-              <Translate contentKey="fidelizacion2App.producto.costoPuntos">Costo Puntos</Translate>
+            <span id="costo">
+              <Translate contentKey="fidelizacion2App.producto.costo">Costo</Translate>
             </span>
           </dt>
-          <dd>{productoEntity.costoPuntos}</dd>
+          <dd>{productoEntity.costo}</dd>
+          <dt>
+            <span id="precioPuntos">
+              <Translate contentKey="fidelizacion2App.producto.precioPuntos">Precio Puntos</Translate>
+            </span>
+          </dt>
+          <dd>{productoEntity.precioPuntos}</dd>
           <dt>
             <span id="puntosRecompensa">
               <Translate contentKey="fidelizacion2App.producto.puntosRecompensa">Puntos Recompensa</Translate>

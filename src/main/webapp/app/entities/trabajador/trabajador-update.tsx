@@ -119,13 +119,6 @@ export const TrabajadorUpdate = (props: RouteComponentProps<{ id: string }>) => 
                 type="text"
               />
               <ValidatedField
-                label={translate('fidelizacion2App.trabajador.reputacion')}
-                id="trabajador-reputacion"
-                name="reputacion"
-                data-cy="reputacion"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('fidelizacion2App.trabajador.descripcion')}
                 id="trabajador-descripcion"
                 name="descripcion"

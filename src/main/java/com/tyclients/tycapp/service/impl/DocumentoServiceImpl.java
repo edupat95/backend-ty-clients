@@ -2,6 +2,7 @@ package com.tyclients.tycapp.service.impl;
 
 import com.tyclients.tycapp.domain.Asociado;
 import com.tyclients.tycapp.domain.AsociadoClub;
+import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Registrador;
 import com.tyclients.tycapp.domain.Documento;
 import com.tyclients.tycapp.repository.AsociadoClubRepository;
@@ -126,7 +127,7 @@ public class DocumentoServiceImpl implements DocumentoService {
     }
     
     @Override
-	public AsociadoClub createAsociadoClubByDoducmento(Documento documento, Registrador registrador) {
+	public AsociadoClub createAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club) {
 		
     	//BUSCO A VER SI EL DOCUMNETO EXISTE
         Optional<Documento> documentoExist = documentoRepository.findByNumeroDni(documento.getNumeroDni());
@@ -135,12 +136,16 @@ public class DocumentoServiceImpl implements DocumentoService {
         
         if(documentoExist.isPresent()) {
         	//AsociadoClub asociadoClub = documentoService.createAsociadoClubByDoducmento(documentoExist.get(), registrador);
+        	//System.out.println("EL DOCUMENT EXISTE!!!!!!");
         	Optional<Asociado> asociadoExist = asociadoRepository.findByDocumento(documentoExist);
         	if(asociadoExist.isPresent()) {
-        		Optional<AsociadoClub> asociadoClubExist = asociadoClubRepository.findByAsociado(asociadoExist.get());
+        		//System.out.println("EL ASOCIADO EXISTE!!!!!!");
+        		Optional<AsociadoClub> asociadoClubExist = asociadoClubRepository.findByAsociadoAndClub(asociadoExist.get(), club);
         		if(asociadoClubExist.isPresent()) { //SI EL ASOCIADOCLUB YA EXISTE, LO DEVOLVEMOS
+        			//System.out.println("EL ASOCIASDOCLUB EXISTE!!!" + asociadoClubExist.get().toString());
         			return asociadoClubExist.get();
         		} else { //EN EL CASO DE QUE NO, LO CREAMOS
+        			//System.out.println("EL ASOCIADOCLUB NO EXISTE Y LO CREAMOS.");
         			AsociadoClub asociadoClub = new AsociadoClub();
         			asociadoClub.setIdentificador(UUID.randomUUID());
         			asociadoClub.setFechaAsociacion(Instant.now());
@@ -153,6 +158,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         			return resultAsociadoClub;
         		}
         	} else { // SI EL DOCUMENTO EXISTE PERO EL ASOCIADO NO, CREAMOS EL ASOCIADO Y EL ASOCIADOCLUB
+        		//System.out.println("CREAMOS AL ASOCIADO.");
         		Asociado asociado = new Asociado();
         		asociado.setEstado(true);
         		asociado.setDocumento(documentoExist.get());
@@ -169,6 +175,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         		return resultAsociadoClub;
         	}
         } else { //SI EL DOCUMENTO NO EXITE TENEMOS QUE CREAR DOCUMENTO, ASOCIADO Y ASOCIADO CLUB
+        	//System.out.println("CREAMOS TODO.");
         	try {
         		// Crear un documento
         		Documento resultDocumento = documentoRepository.save(documento);

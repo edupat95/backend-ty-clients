@@ -6,7 +6,6 @@ import { IAdminClub } from 'app/shared/model/admin-club.model';
 export interface ITrabajador {
   id?: number;
   sueldo?: number | null;
-  reputacion?: number | null;
   descripcion?: string | null;
   fechaIngreso?: string;
   estado?: boolean;

@@ -1,7 +1,9 @@
 package com.tyclients.tycapp.web.rest;
 
 import com.tyclients.tycapp.config.Constants;
+import com.tyclients.tycapp.domain.Authority;
 import com.tyclients.tycapp.domain.User;
+import com.tyclients.tycapp.repository.AuthorityRepository;
 import com.tyclients.tycapp.repository.UserRepository;
 import com.tyclients.tycapp.security.AuthoritiesConstants;
 import com.tyclients.tycapp.service.MailService;
@@ -86,11 +88,14 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    
+    private final AuthorityRepository authorityRepository;
+    
+    public UserResource(AuthorityRepository authorityRepository, UserService userService, UserRepository userRepository, MailService mailService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.authorityRepository = authorityRepository;
     }
 
     /**
@@ -204,4 +209,6 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "userManagement.deleted", login)).build();
     }
+    
+    
 }

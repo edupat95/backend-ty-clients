@@ -34,7 +34,10 @@ public class ProductoCaja implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "productoVentas", "productoCajas", "productoDepositos", "club", "tipoProducto" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "productoVentas", "productoCajas", "productoDepositos", "productoMesas", "club", "tipoProducto" },
+        allowSetters = true
+    )
     private Producto producto;
 
     @ManyToOne(optional = false)

@@ -109,6 +109,7 @@ export const CajeroUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 data-cy="plataDeCambio"
                 type="text"
               />
+              <ValidatedField label={translate('fidelizacion2App.cajero.tipo')} id="cajero-tipo" name="tipo" data-cy="tipo" type="text" />
               <ValidatedField
                 label={translate('fidelizacion2App.cajero.estado')}
                 id="cajero-estado"

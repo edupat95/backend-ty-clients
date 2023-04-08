@@ -30,6 +30,9 @@ public class Cajero implements Serializable {
     @Column(name = "plata_de_cambio")
     private Long plataDeCambio;
 
+    @Column(name = "tipo")
+    private Integer tipo;
+
     @NotNull
     @Column(name = "estado", nullable = false)
     private Boolean estado;
@@ -48,7 +51,7 @@ public class Cajero implements Serializable {
 
     @OneToMany(mappedBy = "cajero")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago", "entregador" }, allowSetters = true)
     private Set<Venta> ventas = new HashSet<>();
 
     @ManyToOne
@@ -81,6 +84,19 @@ public class Cajero implements Serializable {
 
     public void setPlataDeCambio(Long plataDeCambio) {
         this.plataDeCambio = plataDeCambio;
+    }
+
+    public Integer getTipo() {
+        return this.tipo;
+    }
+
+    public Cajero tipo(Integer tipo) {
+        this.setTipo(tipo);
+        return this;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
     }
 
     public Boolean getEstado() {
@@ -204,6 +220,7 @@ public class Cajero implements Serializable {
         return "Cajero{" +
             "id=" + getId() +
             ", plataDeCambio=" + getPlataDeCambio() +
+            ", tipo=" + getTipo() +
             ", estado='" + getEstado() + "'" +
             ", creadDate='" + getCreadDate() + "'" +
             ", updatedDate='" + getUpdatedDate() + "'" +

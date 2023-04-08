@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230402180608",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "producto_mesa",
+  "fields": [
+    {
+      "fieldName": "costoTotal",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "costoTotalPuntos",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cantidad",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductoMesa",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "mesa",
+      "otherEntityRelationshipName": "productoMesa",
+      "relationshipName": "mesa",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "productoMesa",
+      "relationshipName": "producto",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

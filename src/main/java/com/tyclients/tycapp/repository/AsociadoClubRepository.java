@@ -21,4 +21,6 @@ public interface AsociadoClubRepository extends JpaRepository<AsociadoClub, Long
 	Optional<AsociadoClub> findByAsociado(Asociado idAsociado)
 	
 	;
+
+	Optional<AsociadoClub> findByAsociadoAndClub(Asociado asociado, Club club);
 }

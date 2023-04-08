@@ -27,6 +27,11 @@
         "acceso": "Acceso",
         "formaPago": "Forma Pago",
         "tipoProducto": "Tipo Producto",
+        "mesa": "Mesa",
+        "productoMesa": "Producto Mesa",
+        "entregador": "Entregador",
+        "plan": "Plan",
+        "planContratado": "Plan Contratado",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

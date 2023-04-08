@@ -67,6 +67,13 @@
       "otherEntityRelationshipName": "venta",
       "relationshipName": "formaPago",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "entregador",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "entregador",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"

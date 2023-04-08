@@ -13,5 +13,11 @@
                                  constraintName="fk_club__admin_club_id"
                                  referencedColumnNames="id"
                                  referencedTableName="admin_club"/>
+
+        <addForeignKeyConstraint baseColumnNames="plan_contratado_id"
+                                 baseTableName="club"
+                                 constraintName="fk_club__plan_contratado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plan_contratado"/>
     </changeSet>
 </databaseChangeLog>

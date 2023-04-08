@@ -17,9 +17,6 @@
             <column name="sueldo" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="reputacion" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="descripcion" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -69,7 +66,6 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="sueldo" type="numeric"/>
-            <column name="reputacion" type="numeric"/>
             <column name="descripcion" type="string"/>
             <column name="fecha_ingreso" type="date"/>
             <column name="estado" type="boolean"/>

@@ -1,6 +1,7 @@
 package com.tyclients.tycapp.service;
 
 import com.tyclients.tycapp.domain.AsociadoClub;
+import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Registrador;
 import com.tyclients.tycapp.domain.Documento;
 import java.util.Optional;
@@ -58,7 +59,7 @@ public interface DocumentoService {
      */
     void delete(Long id);
     
-    AsociadoClub createAsociadoClubByDoducmento(Documento documento, Registrador registrador);
+    AsociadoClub createAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club);
 
 	Optional<Documento> findByNumeroDni(Long numeroDni);
 }

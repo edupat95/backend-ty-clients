@@ -10,10 +10,6 @@
       "fieldType": "Long"
     },
     {
-      "fieldName": "reputacion",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "descripcion",
       "fieldType": "String"
     },

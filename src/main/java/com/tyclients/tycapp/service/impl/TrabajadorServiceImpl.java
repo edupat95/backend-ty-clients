@@ -48,9 +48,6 @@ public class TrabajadorServiceImpl implements TrabajadorService {
                 if (trabajador.getSueldo() != null) {
                     existingTrabajador.setSueldo(trabajador.getSueldo());
                 }
-                if (trabajador.getReputacion() != null) {
-                    existingTrabajador.setReputacion(trabajador.getReputacion());
-                }
                 if (trabajador.getDescripcion() != null) {
                     existingTrabajador.setDescripcion(trabajador.getDescripcion());
                 }

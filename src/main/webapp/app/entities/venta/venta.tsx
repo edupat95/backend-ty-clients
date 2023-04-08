@@ -153,6 +153,9 @@ export const Venta = (props: RouteComponentProps<{ url: string }>) => {
                   <th>
                     <Translate contentKey="fidelizacion2App.venta.formaPago">Forma Pago</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th>
+                    <Translate contentKey="fidelizacion2App.venta.entregador">Entregador</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
@@ -173,6 +176,7 @@ export const Venta = (props: RouteComponentProps<{ url: string }>) => {
                     <td>{venta.cajero ? <Link to={`/cajero/${venta.cajero.id}`}>{venta.cajero.id}</Link> : ''}</td>
                     <td>{venta.asociado ? <Link to={`/asociado/${venta.asociado.id}`}>{venta.asociado.id}</Link> : ''}</td>
                     <td>{venta.formaPago ? <Link to={`/forma-pago/${venta.formaPago.id}`}>{venta.formaPago.id}</Link> : ''}</td>
+                    <td>{venta.entregador ? <Link to={`/entregador/${venta.entregador.id}`}>{venta.entregador.id}</Link> : ''}</td>
                     <td className="text-end">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`/venta/${venta.id}`} color="info" size="sm" data-cy="entityDetailsButton">

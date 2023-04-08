@@ -2,11 +2,13 @@ package com.tyclients.tycapp.web.rest;
 
 import com.tyclients.tycapp.domain.User;
 import com.tyclients.tycapp.repository.UserRepository;
+import com.tyclients.tycapp.security.AuthoritiesConstants;
 import com.tyclients.tycapp.security.SecurityUtils;
 import com.tyclients.tycapp.service.MailService;
 import com.tyclients.tycapp.service.UserService;
 import com.tyclients.tycapp.service.dto.AdminUserDTO;
 import com.tyclients.tycapp.service.dto.PasswordChangeDTO;
+import com.tyclients.tycapp.service.dto.UserDTO;
 import com.tyclients.tycapp.web.rest.errors.*;
 import com.tyclients.tycapp.web.rest.vm.KeyAndPasswordVM;
 import com.tyclients.tycapp.web.rest.vm.ManagedUserVM;
@@ -17,6 +19,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -190,5 +194,27 @@ public class AccountResource {
             password.length() < ManagedUserVM.PASSWORD_MIN_LENGTH ||
             password.length() > ManagedUserVM.PASSWORD_MAX_LENGTH
         );
+    }
+    
+    //ESTE METODO PERMITE CREEAR VARIAS CUENTAS A LA VEZ
+    @PostMapping("/register/multiple")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<?> registerMultipleAccounts(@Valid @RequestBody List<ManagedUserVM> managedUserVMs) {
+        log.debug("REST request to create Users : {}", managedUserVMs);
+        System.out.println("USUARIOS: " + managedUserVMs);
+        if (managedUserVMs.isEmpty()) {
+            return ResponseEntity.badRequest().body("La lista de usuarios está vacía");
+        }
+
+        for (ManagedUserVM managedUserVM : managedUserVMs) {
+            if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
+                throw new InvalidPasswordException();
+            }
+            
+            User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+            mailService.sendActivationEmail(user);
+        }
+
+        return ResponseEntity.ok().build();
     }
 }

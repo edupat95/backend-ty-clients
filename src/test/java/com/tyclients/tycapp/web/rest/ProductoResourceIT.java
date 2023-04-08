@@ -37,8 +37,11 @@ class ProductoResourceIT {
     private static final Long DEFAULT_PRECIO = 1L;
     private static final Long UPDATED_PRECIO = 2L;
 
-    private static final Long DEFAULT_COSTO_PUNTOS = 1L;
-    private static final Long UPDATED_COSTO_PUNTOS = 2L;
+    private static final Long DEFAULT_COSTO = 1L;
+    private static final Long UPDATED_COSTO = 2L;
+
+    private static final Long DEFAULT_PRECIO_PUNTOS = 1L;
+    private static final Long UPDATED_PRECIO_PUNTOS = 2L;
 
     private static final Long DEFAULT_PUNTOS_RECOMPENSA = 1L;
     private static final Long UPDATED_PUNTOS_RECOMPENSA = 2L;
@@ -82,7 +85,8 @@ class ProductoResourceIT {
         Producto producto = new Producto()
             .nombre(DEFAULT_NOMBRE)
             .precio(DEFAULT_PRECIO)
-            .costoPuntos(DEFAULT_COSTO_PUNTOS)
+            .costo(DEFAULT_COSTO)
+            .precioPuntos(DEFAULT_PRECIO_PUNTOS)
             .puntosRecompensa(DEFAULT_PUNTOS_RECOMPENSA)
             .descripcion(DEFAULT_DESCRIPCION)
             .estado(DEFAULT_ESTADO)
@@ -101,7 +105,8 @@ class ProductoResourceIT {
         Producto producto = new Producto()
             .nombre(UPDATED_NOMBRE)
             .precio(UPDATED_PRECIO)
-            .costoPuntos(UPDATED_COSTO_PUNTOS)
+            .costo(UPDATED_COSTO)
+            .precioPuntos(UPDATED_PRECIO_PUNTOS)
             .puntosRecompensa(UPDATED_PUNTOS_RECOMPENSA)
             .descripcion(UPDATED_DESCRIPCION)
             .estado(UPDATED_ESTADO)
@@ -130,7 +135,8 @@ class ProductoResourceIT {
         Producto testProducto = productoList.get(productoList.size() - 1);
         assertThat(testProducto.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testProducto.getPrecio()).isEqualTo(DEFAULT_PRECIO);
-        assertThat(testProducto.getCostoPuntos()).isEqualTo(DEFAULT_COSTO_PUNTOS);
+        assertThat(testProducto.getCosto()).isEqualTo(DEFAULT_COSTO);
+        assertThat(testProducto.getPrecioPuntos()).isEqualTo(DEFAULT_PRECIO_PUNTOS);
         assertThat(testProducto.getPuntosRecompensa()).isEqualTo(DEFAULT_PUNTOS_RECOMPENSA);
         assertThat(testProducto.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testProducto.getEstado()).isEqualTo(DEFAULT_ESTADO);
@@ -192,10 +198,10 @@ class ProductoResourceIT {
 
     @Test
     @Transactional
-    void checkCostoPuntosIsRequired() throws Exception {
+    void checkPrecioPuntosIsRequired() throws Exception {
         int databaseSizeBeforeTest = productoRepository.findAll().size();
         // set the field null
-        producto.setCostoPuntos(null);
+        producto.setPrecioPuntos(null);
 
         // Create the Producto, which fails.
 
@@ -255,7 +261,8 @@ class ProductoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(producto.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE)))
             .andExpect(jsonPath("$.[*].precio").value(hasItem(DEFAULT_PRECIO.intValue())))
-            .andExpect(jsonPath("$.[*].costoPuntos").value(hasItem(DEFAULT_COSTO_PUNTOS.intValue())))
+            .andExpect(jsonPath("$.[*].costo").value(hasItem(DEFAULT_COSTO.intValue())))
+            .andExpect(jsonPath("$.[*].precioPuntos").value(hasItem(DEFAULT_PRECIO_PUNTOS.intValue())))
             .andExpect(jsonPath("$.[*].puntosRecompensa").value(hasItem(DEFAULT_PUNTOS_RECOMPENSA.intValue())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())))
@@ -277,7 +284,8 @@ class ProductoResourceIT {
             .andExpect(jsonPath("$.id").value(producto.getId().intValue()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE))
             .andExpect(jsonPath("$.precio").value(DEFAULT_PRECIO.intValue()))
-            .andExpect(jsonPath("$.costoPuntos").value(DEFAULT_COSTO_PUNTOS.intValue()))
+            .andExpect(jsonPath("$.costo").value(DEFAULT_COSTO.intValue()))
+            .andExpect(jsonPath("$.precioPuntos").value(DEFAULT_PRECIO_PUNTOS.intValue()))
             .andExpect(jsonPath("$.puntosRecompensa").value(DEFAULT_PUNTOS_RECOMPENSA.intValue()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()))
@@ -307,7 +315,8 @@ class ProductoResourceIT {
         updatedProducto
             .nombre(UPDATED_NOMBRE)
             .precio(UPDATED_PRECIO)
-            .costoPuntos(UPDATED_COSTO_PUNTOS)
+            .costo(UPDATED_COSTO)
+            .precioPuntos(UPDATED_PRECIO_PUNTOS)
             .puntosRecompensa(UPDATED_PUNTOS_RECOMPENSA)
             .descripcion(UPDATED_DESCRIPCION)
             .estado(UPDATED_ESTADO)
@@ -328,7 +337,8 @@ class ProductoResourceIT {
         Producto testProducto = productoList.get(productoList.size() - 1);
         assertThat(testProducto.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testProducto.getPrecio()).isEqualTo(UPDATED_PRECIO);
-        assertThat(testProducto.getCostoPuntos()).isEqualTo(UPDATED_COSTO_PUNTOS);
+        assertThat(testProducto.getCosto()).isEqualTo(UPDATED_COSTO);
+        assertThat(testProducto.getPrecioPuntos()).isEqualTo(UPDATED_PRECIO_PUNTOS);
         assertThat(testProducto.getPuntosRecompensa()).isEqualTo(UPDATED_PUNTOS_RECOMPENSA);
         assertThat(testProducto.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testProducto.getEstado()).isEqualTo(UPDATED_ESTADO);
@@ -407,9 +417,9 @@ class ProductoResourceIT {
         partialUpdatedProducto
             .nombre(UPDATED_NOMBRE)
             .precio(UPDATED_PRECIO)
-            .descripcion(UPDATED_DESCRIPCION)
-            .createdDate(UPDATED_CREATED_DATE)
-            .updatedDate(UPDATED_UPDATED_DATE);
+            .puntosRecompensa(UPDATED_PUNTOS_RECOMPENSA)
+            .estado(UPDATED_ESTADO)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restProductoMockMvc
             .perform(
@@ -425,12 +435,13 @@ class ProductoResourceIT {
         Producto testProducto = productoList.get(productoList.size() - 1);
         assertThat(testProducto.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testProducto.getPrecio()).isEqualTo(UPDATED_PRECIO);
-        assertThat(testProducto.getCostoPuntos()).isEqualTo(DEFAULT_COSTO_PUNTOS);
-        assertThat(testProducto.getPuntosRecompensa()).isEqualTo(DEFAULT_PUNTOS_RECOMPENSA);
-        assertThat(testProducto.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
-        assertThat(testProducto.getEstado()).isEqualTo(DEFAULT_ESTADO);
+        assertThat(testProducto.getCosto()).isEqualTo(DEFAULT_COSTO);
+        assertThat(testProducto.getPrecioPuntos()).isEqualTo(DEFAULT_PRECIO_PUNTOS);
+        assertThat(testProducto.getPuntosRecompensa()).isEqualTo(UPDATED_PUNTOS_RECOMPENSA);
+        assertThat(testProducto.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
+        assertThat(testProducto.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testProducto.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
-        assertThat(testProducto.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
+        assertThat(testProducto.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
     }
 
     @Test
@@ -448,7 +459,8 @@ class ProductoResourceIT {
         partialUpdatedProducto
             .nombre(UPDATED_NOMBRE)
             .precio(UPDATED_PRECIO)
-            .costoPuntos(UPDATED_COSTO_PUNTOS)
+            .costo(UPDATED_COSTO)
+            .precioPuntos(UPDATED_PRECIO_PUNTOS)
             .puntosRecompensa(UPDATED_PUNTOS_RECOMPENSA)
             .descripcion(UPDATED_DESCRIPCION)
             .estado(UPDATED_ESTADO)
@@ -469,7 +481,8 @@ class ProductoResourceIT {
         Producto testProducto = productoList.get(productoList.size() - 1);
         assertThat(testProducto.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testProducto.getPrecio()).isEqualTo(UPDATED_PRECIO);
-        assertThat(testProducto.getCostoPuntos()).isEqualTo(UPDATED_COSTO_PUNTOS);
+        assertThat(testProducto.getCosto()).isEqualTo(UPDATED_COSTO);
+        assertThat(testProducto.getPrecioPuntos()).isEqualTo(UPDATED_PRECIO_PUNTOS);
         assertThat(testProducto.getPuntosRecompensa()).isEqualTo(UPDATED_PUNTOS_RECOMPENSA);
         assertThat(testProducto.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testProducto.getEstado()).isEqualTo(UPDATED_ESTADO);

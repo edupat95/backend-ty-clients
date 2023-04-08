@@ -1,11 +1,16 @@
 package com.tyclients.tycapp.web.rest;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tyclients.tycapp.domain.Cajero;
+import com.tyclients.tycapp.domain.Mesa;
 import com.tyclients.tycapp.domain.ProductoVenta;
 import com.tyclients.tycapp.domain.Venta;
 import com.tyclients.tycapp.repository.VentaRepository;
 import com.tyclients.tycapp.service.CajeroService;
+import com.tyclients.tycapp.service.MesaService;
+import com.tyclients.tycapp.service.ProductoMesaService;
 import com.tyclients.tycapp.service.VentaService;
 import com.tyclients.tycapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -14,6 +19,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -49,11 +56,17 @@ public class VentaResource {
     private final VentaRepository ventaRepository;
     
     private final CajeroService cajeroService;
-
-    public VentaResource(VentaService ventaService, VentaRepository ventaRepository, CajeroService cajeroService) {
+    
+    private final MesaService mesaService;
+    
+    private final ProductoMesaService productoMesaService;
+    
+    public VentaResource(ProductoMesaService productoMesaService, MesaService mesaService, VentaService ventaService, VentaRepository ventaRepository, CajeroService cajeroService) {
         this.ventaService = ventaService;
         this.ventaRepository = ventaRepository;
         this.cajeroService = cajeroService;
+        this.mesaService = mesaService;
+        this.productoMesaService = productoMesaService;
     }
 
     /**
@@ -194,7 +207,7 @@ public class VentaResource {
         List<ProductoVenta> productosVenta = ventaService.cashierCreateCanje(jsonNode); 
         return productosVenta;
     }
-    // CREACION DE VENTA EN UN CLUB ESPECIFICO CON UN CAJERO ESPECIFICO
+    // CREACION DE VENTA EN UN CLUB ESPECIFICO CON UN CAJERO ESPECIFICO SIN ASOCIADO ESPECIFICO
     @PostMapping("/ventas/create")
     public List<ProductoVenta> CashierCreateVenta(@RequestBody JsonNode jsonNode) throws URISyntaxException {
         log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
@@ -207,6 +220,29 @@ public class VentaResource {
     public List<ProductoVenta> CashierCreateVentaSinIdentificar(@RequestBody JsonNode jsonNode) throws URISyntaxException {
         log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
         List<ProductoVenta> productosVenta = ventaService.cashierCreateVentaSinIdentificar(jsonNode);
+        return productosVenta;
+    }
+    
+    //CREAR UNA VENTA DE UNA MESA. ES DECIR CERRAR UNA MESA Y COBRAR.
+    @PostMapping("/ventas/mesa/create")
+    public List<ProductoVenta> CashierCreateVentaMesa(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
+        List<ProductoVenta> productosVenta = ventaService.cashierCreateVentaSinIdentificar(jsonNode);
+        System.out.println("AAAAAAALista de productos: " + productosVenta);
+        if(productosVenta != null) {
+        	ObjectMapper obj = new ObjectMapper();
+            obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        	Long mesaId = obj.convertValue(jsonNode.get("MesaId"),Long.class);
+        	Optional<Mesa> mesa = mesaService.findOne(mesaId);
+        	if(mesa.isPresent()) {
+        		productoMesaService.deleteByMesa(mesa);
+        	} else {
+                return null;
+        	}
+        } else {
+        	return null;
+        }
         return productosVenta;
     }
     
@@ -229,5 +265,38 @@ public class VentaResource {
         List<Venta> ventas = ventaService.findByFechaBetweenAndCajeros(fechaDesde, fechaHasta, cajerosDelClub); //ventaService.cashierCreateVentaSinIdentificar(jsonNode);
         
         return ventas;
+    }
+
+    @PutMapping("/ventas/entregar")
+    public ResponseEntity<Venta> entregarVenta(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
+    	ObjectMapper obj = new ObjectMapper();
+        obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        UUID identificador_ticket = obj.convertValue(jsonNode.get("identificador_ticket"),UUID.class);
+        Long idEntregador = obj.convertValue(jsonNode.get("idEntregador"),Long.class);
+        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class);
+        System.out.println("IDENTIFICADOR RECIBIDO: " + identificador_ticket);
+        System.out.println("idEntregador: " + idEntregador);
+        System.out.println("idClub: " + idClub);
+        
+        return null;
+    }
+    @PostMapping("/ventas/buscar")
+    public ResponseEntity<Venta> buscarVentaConIdentificador(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
+    	ObjectMapper obj = new ObjectMapper();
+        obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        UUID identificador_ticket = obj.convertValue(jsonNode.get("identificador_ticket"),UUID.class);
+        Long idEntregador = obj.convertValue(jsonNode.get("idEntregador"),Long.class);
+        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class);
+        System.out.println("IDENTIFICADOR RECIBIDO: " + identificador_ticket);
+        System.out.println("idEntregador: " + idEntregador);
+        System.out.println("idClub: " + idClub);
+        
+        Optional<Venta> venta = ventaService.findByIdentificador(idClub,idEntregador,identificador_ticket);
+        
+        return ResponseUtil.wrapOrNotFound(venta);
     }
 }

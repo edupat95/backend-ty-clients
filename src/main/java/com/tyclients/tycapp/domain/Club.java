@@ -48,6 +48,12 @@ public class Club implements Serializable {
     @JoinColumn(unique = true)
     private AdminClub adminClub;
 
+    @JsonIgnoreProperties(value = { "plan" }, allowSetters = true)
+    @OneToOne(optional = false)
+    @NotNull
+    @JoinColumn(unique = true)
+    private PlanContratado planContratado;
+
     @OneToMany(mappedBy = "club")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "productos", "club" }, allowSetters = true)
@@ -85,8 +91,16 @@ public class Club implements Serializable {
 
     @OneToMany(mappedBy = "club")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productoVentas", "productoCajas", "productoDepositos", "club", "tipoProducto" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "productoVentas", "productoCajas", "productoDepositos", "productoMesas", "club", "tipoProducto" },
+        allowSetters = true
+    )
     private Set<Producto> productos = new HashSet<>();
+
+    @OneToMany(mappedBy = "club")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "productoMesas", "club" }, allowSetters = true)
+    private Set<Mesa> mesas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -178,6 +192,19 @@ public class Club implements Serializable {
 
     public Club adminClub(AdminClub adminClub) {
         this.setAdminClub(adminClub);
+        return this;
+    }
+
+    public PlanContratado getPlanContratado() {
+        return this.planContratado;
+    }
+
+    public void setPlanContratado(PlanContratado planContratado) {
+        this.planContratado = planContratado;
+    }
+
+    public Club planContratado(PlanContratado planContratado) {
+        this.setPlanContratado(planContratado);
         return this;
     }
 
@@ -426,6 +453,37 @@ public class Club implements Serializable {
     public Club removeProducto(Producto producto) {
         this.productos.remove(producto);
         producto.setClub(null);
+        return this;
+    }
+
+    public Set<Mesa> getMesas() {
+        return this.mesas;
+    }
+
+    public void setMesas(Set<Mesa> mesas) {
+        if (this.mesas != null) {
+            this.mesas.forEach(i -> i.setClub(null));
+        }
+        if (mesas != null) {
+            mesas.forEach(i -> i.setClub(this));
+        }
+        this.mesas = mesas;
+    }
+
+    public Club mesas(Set<Mesa> mesas) {
+        this.setMesas(mesas);
+        return this;
+    }
+
+    public Club addMesa(Mesa mesa) {
+        this.mesas.add(mesa);
+        mesa.setClub(this);
+        return this;
+    }
+
+    public Club removeMesa(Mesa mesa) {
+        this.mesas.remove(mesa);
+        mesa.setClub(null);
         return this;
     }
 

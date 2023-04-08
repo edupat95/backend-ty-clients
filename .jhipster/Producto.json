@@ -16,7 +16,11 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "costoPuntos",
+      "fieldName": "costo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "precioPuntos",
       "fieldType": "Long",
       "fieldValidateRules": ["required"]
     },
@@ -66,6 +70,12 @@
       "otherEntityName": "productoDeposito",
       "otherEntityRelationshipName": "producto",
       "relationshipName": "productoDeposito",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "productoMesa",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "productoMesa",
       "relationshipType": "one-to-many"
     },
     {

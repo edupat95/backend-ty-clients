@@ -35,9 +35,12 @@ public class Producto implements Serializable {
     @Column(name = "precio", nullable = false)
     private Long precio;
 
+    @Column(name = "costo")
+    private Long costo;
+
     @NotNull
-    @Column(name = "costo_puntos", nullable = false)
-    private Long costoPuntos;
+    @Column(name = "precio_puntos", nullable = false)
+    private Long precioPuntos;
 
     @NotNull
     @Column(name = "puntos_recompensa", nullable = false)
@@ -71,10 +74,25 @@ public class Producto implements Serializable {
     @JsonIgnoreProperties(value = { "deposito", "producto" }, allowSetters = true)
     private Set<ProductoDeposito> productoDepositos = new HashSet<>();
 
+    @OneToMany(mappedBy = "producto")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "mesa", "producto" }, allowSetters = true)
+    private Set<ProductoMesa> productoMesas = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "adminClub", "tipoProductos", "formaPagos", "cajas", "depositos", "trabajadors", "asociadoClubs", "eventos", "productos",
+            "adminClub",
+            "planContratado",
+            "tipoProductos",
+            "formaPagos",
+            "cajas",
+            "depositos",
+            "trabajadors",
+            "asociadoClubs",
+            "eventos",
+            "productos",
+            "mesas",
         },
         allowSetters = true
     )
@@ -125,17 +143,30 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    public Long getCostoPuntos() {
-        return this.costoPuntos;
+    public Long getCosto() {
+        return this.costo;
     }
 
-    public Producto costoPuntos(Long costoPuntos) {
-        this.setCostoPuntos(costoPuntos);
+    public Producto costo(Long costo) {
+        this.setCosto(costo);
         return this;
     }
 
-    public void setCostoPuntos(Long costoPuntos) {
-        this.costoPuntos = costoPuntos;
+    public void setCosto(Long costo) {
+        this.costo = costo;
+    }
+
+    public Long getPrecioPuntos() {
+        return this.precioPuntos;
+    }
+
+    public Producto precioPuntos(Long precioPuntos) {
+        this.setPrecioPuntos(precioPuntos);
+        return this;
+    }
+
+    public void setPrecioPuntos(Long precioPuntos) {
+        this.precioPuntos = precioPuntos;
     }
 
     public Long getPuntosRecompensa() {
@@ -296,6 +327,37 @@ public class Producto implements Serializable {
         return this;
     }
 
+    public Set<ProductoMesa> getProductoMesas() {
+        return this.productoMesas;
+    }
+
+    public void setProductoMesas(Set<ProductoMesa> productoMesas) {
+        if (this.productoMesas != null) {
+            this.productoMesas.forEach(i -> i.setProducto(null));
+        }
+        if (productoMesas != null) {
+            productoMesas.forEach(i -> i.setProducto(this));
+        }
+        this.productoMesas = productoMesas;
+    }
+
+    public Producto productoMesas(Set<ProductoMesa> productoMesas) {
+        this.setProductoMesas(productoMesas);
+        return this;
+    }
+
+    public Producto addProductoMesa(ProductoMesa productoMesa) {
+        this.productoMesas.add(productoMesa);
+        productoMesa.setProducto(this);
+        return this;
+    }
+
+    public Producto removeProductoMesa(ProductoMesa productoMesa) {
+        this.productoMesas.remove(productoMesa);
+        productoMesa.setProducto(null);
+        return this;
+    }
+
     public Club getClub() {
         return this.club;
     }
@@ -348,7 +410,8 @@ public class Producto implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", precio=" + getPrecio() +
-            ", costoPuntos=" + getCostoPuntos() +
+            ", costo=" + getCosto() +
+            ", precioPuntos=" + getPrecioPuntos() +
             ", puntosRecompensa=" + getPuntosRecompensa() +
             ", descripcion='" + getDescripcion() + "'" +
             ", estado='" + getEstado() + "'" +

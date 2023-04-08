@@ -93,6 +93,15 @@ public class CacheConfiguration {
             createCache(cm, com.tyclients.tycapp.domain.Club.class.getName() + ".tipoProductos");
             createCache(cm, com.tyclients.tycapp.domain.FormaPago.class.getName() + ".ventas");
             createCache(cm, com.tyclients.tycapp.domain.Venta.class.getName() + ".formaPagos");
+            createCache(cm, com.tyclients.tycapp.domain.Producto.class.getName() + ".productoMesas");
+            createCache(cm, com.tyclients.tycapp.domain.Mesa.class.getName());
+            createCache(cm, com.tyclients.tycapp.domain.Mesa.class.getName() + ".productoMesas");
+            createCache(cm, com.tyclients.tycapp.domain.ProductoMesa.class.getName());
+            createCache(cm, com.tyclients.tycapp.domain.Entregador.class.getName());
+            createCache(cm, com.tyclients.tycapp.domain.Entregador.class.getName() + ".ventas");
+            createCache(cm, com.tyclients.tycapp.domain.Plan.class.getName());
+            createCache(cm, com.tyclients.tycapp.domain.PlanContratado.class.getName());
+            createCache(cm, com.tyclients.tycapp.domain.Club.class.getName() + ".mesas");
             // jhipster-needle-ehcache-add-entry
         };
     }

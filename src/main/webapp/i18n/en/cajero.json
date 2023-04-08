@@ -19,6 +19,7 @@
       },
       "id": "ID",
       "plataDeCambio": "Plata De Cambio",
+      "tipo": "Tipo",
       "estado": "Estado",
       "creadDate": "Cread Date",
       "updatedDate": "Updated Date",

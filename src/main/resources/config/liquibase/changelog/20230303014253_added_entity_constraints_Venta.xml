@@ -25,5 +25,11 @@
                                  constraintName="fk_venta__forma_pago_id"
                                  referencedColumnNames="id"
                                  referencedTableName="forma_pago"/>
+
+        <addForeignKeyConstraint baseColumnNames="entregador_id"
+                                 baseTableName="venta"
+                                 constraintName="fk_venta__entregador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entregador"/>
     </changeSet>
 </databaseChangeLog>

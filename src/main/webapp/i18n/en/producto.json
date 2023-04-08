@@ -20,7 +20,8 @@
       "id": "ID",
       "nombre": "Nombre",
       "precio": "Precio",
-      "costoPuntos": "Costo Puntos",
+      "costo": "Costo",
+      "precioPuntos": "Precio Puntos",
       "puntosRecompensa": "Puntos Recompensa",
       "descripcion": "Descripcion",
       "estado": "Estado",
@@ -29,6 +30,7 @@
       "productoVenta": "Producto Venta",
       "productoCaja": "Producto Caja",
       "productoDeposito": "Producto Deposito",
+      "productoMesa": "Producto Mesa",
       "club": "Club",
       "tipoProducto": "Tipo Producto"
     }

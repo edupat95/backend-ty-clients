@@ -68,6 +68,10 @@ public class Venta implements Serializable {
     @JsonIgnoreProperties(value = { "ventas", "club" }, allowSetters = true)
     private FormaPago formaPago;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "trabajador", "ventas" }, allowSetters = true)
+    private Entregador entregador;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -228,6 +232,19 @@ public class Venta implements Serializable {
 
     public Venta formaPago(FormaPago formaPago) {
         this.setFormaPago(formaPago);
+        return this;
+    }
+
+    public Entregador getEntregador() {
+        return this.entregador;
+    }
+
+    public void setEntregador(Entregador entregador) {
+        this.entregador = entregador;
+    }
+
+    public Venta entregador(Entregador entregador) {
+        this.setEntregador(entregador);
         return this;
     }
 

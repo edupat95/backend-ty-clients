@@ -17,6 +17,9 @@
             <column name="plata_de_cambio" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="tipo" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="estado" type="boolean">
                 <constraints nullable="false" />
             </column>
@@ -56,6 +59,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="plata_de_cambio" type="numeric"/>
+            <column name="tipo" type="numeric"/>
             <column name="estado" type="boolean"/>
             <column name="cread_date" type="date"/>
             <column name="updated_date" type="date"/>

@@ -10,6 +10,10 @@
       "fieldType": "Long"
     },
     {
+      "fieldName": "tipo",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "estado",
       "fieldType": "Boolean",
       "fieldValidateRules": ["required"]

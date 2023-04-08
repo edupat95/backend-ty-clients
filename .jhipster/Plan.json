@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20230402180610",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "plan",
+  "fields": [
+    {
+      "fieldName": "numeroPlan",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Plan",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

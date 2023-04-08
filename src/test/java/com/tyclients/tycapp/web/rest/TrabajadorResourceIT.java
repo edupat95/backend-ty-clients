@@ -41,9 +41,6 @@ class TrabajadorResourceIT {
     private static final Long DEFAULT_SUELDO = 1L;
     private static final Long UPDATED_SUELDO = 2L;
 
-    private static final Long DEFAULT_REPUTACION = 1L;
-    private static final Long UPDATED_REPUTACION = 2L;
-
     private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
@@ -85,7 +82,6 @@ class TrabajadorResourceIT {
     public static Trabajador createEntity(EntityManager em) {
         Trabajador trabajador = new Trabajador()
             .sueldo(DEFAULT_SUELDO)
-            .reputacion(DEFAULT_REPUTACION)
             .descripcion(DEFAULT_DESCRIPCION)
             .fechaIngreso(DEFAULT_FECHA_INGRESO)
             .estado(DEFAULT_ESTADO)
@@ -128,7 +124,6 @@ class TrabajadorResourceIT {
     public static Trabajador createUpdatedEntity(EntityManager em) {
         Trabajador trabajador = new Trabajador()
             .sueldo(UPDATED_SUELDO)
-            .reputacion(UPDATED_REPUTACION)
             .descripcion(UPDATED_DESCRIPCION)
             .fechaIngreso(UPDATED_FECHA_INGRESO)
             .estado(UPDATED_ESTADO)
@@ -181,7 +176,6 @@ class TrabajadorResourceIT {
         assertThat(trabajadorList).hasSize(databaseSizeBeforeCreate + 1);
         Trabajador testTrabajador = trabajadorList.get(trabajadorList.size() - 1);
         assertThat(testTrabajador.getSueldo()).isEqualTo(DEFAULT_SUELDO);
-        assertThat(testTrabajador.getReputacion()).isEqualTo(DEFAULT_REPUTACION);
         assertThat(testTrabajador.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testTrabajador.getFechaIngreso()).isEqualTo(DEFAULT_FECHA_INGRESO);
         assertThat(testTrabajador.getEstado()).isEqualTo(DEFAULT_ESTADO);
@@ -254,7 +248,6 @@ class TrabajadorResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(trabajador.getId().intValue())))
             .andExpect(jsonPath("$.[*].sueldo").value(hasItem(DEFAULT_SUELDO.intValue())))
-            .andExpect(jsonPath("$.[*].reputacion").value(hasItem(DEFAULT_REPUTACION.intValue())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
             .andExpect(jsonPath("$.[*].fechaIngreso").value(hasItem(sameInstant(DEFAULT_FECHA_INGRESO))))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())))
@@ -275,7 +268,6 @@ class TrabajadorResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(trabajador.getId().intValue()))
             .andExpect(jsonPath("$.sueldo").value(DEFAULT_SUELDO.intValue()))
-            .andExpect(jsonPath("$.reputacion").value(DEFAULT_REPUTACION.intValue()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
             .andExpect(jsonPath("$.fechaIngreso").value(sameInstant(DEFAULT_FECHA_INGRESO)))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()))
@@ -304,7 +296,6 @@ class TrabajadorResourceIT {
         em.detach(updatedTrabajador);
         updatedTrabajador
             .sueldo(UPDATED_SUELDO)
-            .reputacion(UPDATED_REPUTACION)
             .descripcion(UPDATED_DESCRIPCION)
             .fechaIngreso(UPDATED_FECHA_INGRESO)
             .estado(UPDATED_ESTADO)
@@ -324,7 +315,6 @@ class TrabajadorResourceIT {
         assertThat(trabajadorList).hasSize(databaseSizeBeforeUpdate);
         Trabajador testTrabajador = trabajadorList.get(trabajadorList.size() - 1);
         assertThat(testTrabajador.getSueldo()).isEqualTo(UPDATED_SUELDO);
-        assertThat(testTrabajador.getReputacion()).isEqualTo(UPDATED_REPUTACION);
         assertThat(testTrabajador.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testTrabajador.getFechaIngreso()).isEqualTo(UPDATED_FECHA_INGRESO);
         assertThat(testTrabajador.getEstado()).isEqualTo(UPDATED_ESTADO);
@@ -400,7 +390,7 @@ class TrabajadorResourceIT {
         Trabajador partialUpdatedTrabajador = new Trabajador();
         partialUpdatedTrabajador.setId(trabajador.getId());
 
-        partialUpdatedTrabajador.reputacion(UPDATED_REPUTACION).estado(UPDATED_ESTADO).updatedDate(UPDATED_UPDATED_DATE);
+        partialUpdatedTrabajador.descripcion(UPDATED_DESCRIPCION).createdDate(UPDATED_CREATED_DATE);
 
         restTrabajadorMockMvc
             .perform(
@@ -415,12 +405,11 @@ class TrabajadorResourceIT {
         assertThat(trabajadorList).hasSize(databaseSizeBeforeUpdate);
         Trabajador testTrabajador = trabajadorList.get(trabajadorList.size() - 1);
         assertThat(testTrabajador.getSueldo()).isEqualTo(DEFAULT_SUELDO);
-        assertThat(testTrabajador.getReputacion()).isEqualTo(UPDATED_REPUTACION);
-        assertThat(testTrabajador.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
+        assertThat(testTrabajador.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testTrabajador.getFechaIngreso()).isEqualTo(DEFAULT_FECHA_INGRESO);
-        assertThat(testTrabajador.getEstado()).isEqualTo(UPDATED_ESTADO);
-        assertThat(testTrabajador.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-        assertThat(testTrabajador.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
+        assertThat(testTrabajador.getEstado()).isEqualTo(DEFAULT_ESTADO);
+        assertThat(testTrabajador.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testTrabajador.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
     }
 
     @Test
@@ -437,7 +426,6 @@ class TrabajadorResourceIT {
 
         partialUpdatedTrabajador
             .sueldo(UPDATED_SUELDO)
-            .reputacion(UPDATED_REPUTACION)
             .descripcion(UPDATED_DESCRIPCION)
             .fechaIngreso(UPDATED_FECHA_INGRESO)
             .estado(UPDATED_ESTADO)
@@ -457,7 +445,6 @@ class TrabajadorResourceIT {
         assertThat(trabajadorList).hasSize(databaseSizeBeforeUpdate);
         Trabajador testTrabajador = trabajadorList.get(trabajadorList.size() - 1);
         assertThat(testTrabajador.getSueldo()).isEqualTo(UPDATED_SUELDO);
-        assertThat(testTrabajador.getReputacion()).isEqualTo(UPDATED_REPUTACION);
         assertThat(testTrabajador.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testTrabajador.getFechaIngreso()).isEqualTo(UPDATED_FECHA_INGRESO);
         assertThat(testTrabajador.getEstado()).isEqualTo(UPDATED_ESTADO);

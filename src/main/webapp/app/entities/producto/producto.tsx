@@ -130,8 +130,11 @@ export const Producto = (props: RouteComponentProps<{ url: string }>) => {
                   <th className="hand" onClick={sort('precio')}>
                     <Translate contentKey="fidelizacion2App.producto.precio">Precio</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
-                  <th className="hand" onClick={sort('costoPuntos')}>
-                    <Translate contentKey="fidelizacion2App.producto.costoPuntos">Costo Puntos</Translate> <FontAwesomeIcon icon="sort" />
+                  <th className="hand" onClick={sort('costo')}>
+                    <Translate contentKey="fidelizacion2App.producto.costo">Costo</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={sort('precioPuntos')}>
+                    <Translate contentKey="fidelizacion2App.producto.precioPuntos">Precio Puntos</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th className="hand" onClick={sort('puntosRecompensa')}>
                     <Translate contentKey="fidelizacion2App.producto.puntosRecompensa">Puntos Recompensa</Translate>{' '}
@@ -168,7 +171,8 @@ export const Producto = (props: RouteComponentProps<{ url: string }>) => {
                     </td>
                     <td>{producto.nombre}</td>
                     <td>{producto.precio}</td>
-                    <td>{producto.costoPuntos}</td>
+                    <td>{producto.costo}</td>
+                    <td>{producto.precioPuntos}</td>
                     <td>{producto.puntosRecompensa}</td>
                     <td>{producto.descripcion}</td>
                     <td>{producto.estado ? 'true' : 'false'}</td>

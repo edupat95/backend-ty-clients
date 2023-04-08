@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tyclients.tycapp.repository.ClubRepository;
 import com.tyclients.tycapp.repository.FormaPagoRepository;
+import com.tyclients.tycapp.repository.MesaRepository;
 import com.tyclients.tycapp.repository.ProductoVentaRepository;
 import com.tyclients.tycapp.service.AsociadoClubService;
 import com.tyclients.tycapp.service.ClubService;
@@ -12,13 +13,15 @@ import com.tyclients.tycapp.service.ProductoService;
 import com.tyclients.tycapp.domain.AsociadoClub;
 import com.tyclients.tycapp.domain.Cajero;
 import com.tyclients.tycapp.domain.Club;
+import com.tyclients.tycapp.domain.Entregador;
 import com.tyclients.tycapp.domain.FormaPago;
+import com.tyclients.tycapp.domain.Mesa;
 import com.tyclients.tycapp.domain.Producto;
 import com.tyclients.tycapp.domain.ProductoVenta;
 import com.tyclients.tycapp.domain.Venta;
 import com.tyclients.tycapp.repository.VentaRepository;
 import com.tyclients.tycapp.service.VentaService;
-
+import com.tyclients.tycapp.service.EntregadorService;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -53,14 +56,22 @@ public class VentaServiceImpl implements VentaService {
     private final ProductoService productoService;
     
     private final FormaPagoRepository formaPagoRepository;
-        
-    public VentaServiceImpl(FormaPagoRepository formaPagoRepository, ProductoService productoService,ProductoVentaRepository productoVentaRepository, AsociadoClubService asociadoClubService, VentaRepository ventaRepository, ClubRepository clubRepository) {
+    
+    private final MesaRepository mesaRepository;
+
+    private final ClubService clubService;
+
+    private final EntregadorService entregadorService;
+    public VentaServiceImpl(EntregadorService entregadorService, ClubService clubService, MesaRepository mesaRepository, FormaPagoRepository formaPagoRepository, ProductoService productoService,ProductoVentaRepository productoVentaRepository, AsociadoClubService asociadoClubService, VentaRepository ventaRepository, ClubRepository clubRepository) {
         this.ventaRepository = ventaRepository;
         this.clubRepository = clubRepository;
         this.asociadoClubService = asociadoClubService;
         this.productoVentaRepository = productoVentaRepository;
         this.productoService = productoService;
         this.formaPagoRepository = formaPagoRepository;
+        this.mesaRepository = mesaRepository;
+        this.clubService = clubService;
+        this.entregadorService = entregadorService;
     }
     @Override
     public Venta save(Venta venta) {
@@ -159,7 +170,6 @@ public class VentaServiceImpl implements VentaService {
 
         Long costoTotalVentaAux = 0L;
         Long recompensaTotalAux = 0L;
-        
         for(JsonNode json : productos) {
         	Long id = Long.parseLong(json.get("id").toString());
         	Long cantidad = Long.parseLong(json.get("cantidad").toString());
@@ -178,7 +188,7 @@ public class VentaServiceImpl implements VentaService {
         	//System.out.println("----------------------->" + producto.toString());
         }
         venta.setCostoTotal(costoTotalVentaAux);
-        this.update(venta);
+        this.update(venta); 
         asociadoClub.get().setPuntosClub(asociadoClub.get().getPuntosClub() + recompensaTotalAux);
         asociadoClubService.update(asociadoClub.get());
         return productosVenta;
@@ -207,10 +217,10 @@ public class VentaServiceImpl implements VentaService {
         	Optional<Producto>producto = productoService.findOne(id);
         	ProductoVenta pv = new ProductoVenta();
         	
-        	costoTotalPuntosVentaAux = costoTotalPuntosVentaAux + (producto.get().getCostoPuntos()*cantidad);
+        	costoTotalPuntosVentaAux = costoTotalPuntosVentaAux + (producto.get().getPrecioPuntos()*cantidad);
         	
         	pv.setCostoTotal(null);
-        	pv.setCostoTotalPuntos(producto.get().getCostoPuntos()*cantidad);
+        	pv.setCostoTotalPuntos(producto.get().getPrecioPuntos()*cantidad);
         	pv.setVenta(ventaResult);
         	pv.setProducto(producto.get());
         	pv.setCantidad(cantidad);
@@ -288,6 +298,17 @@ public class VentaServiceImpl implements VentaService {
 		
 		// TODO Auto-generated method stub
 		return ventas;
+	}
+	@Override
+	public Optional<Venta> findByIdentificador(Long idClub, Long idEntregador, UUID identificador_ticket) {
+		Optional<Club> club = clubService.findOne(idClub);
+        Optional<Entregador> entregador = entregadorService.findOne(idEntregador);
+        if(entregador.get().getTrabajador().getClub() == club.get()) {
+        	Optional<Venta> venta = ventaRepository.findByIdentificadorTicket(identificador_ticket);
+        	return venta;
+        }
+        
+        return null;
 	}
 	
 }

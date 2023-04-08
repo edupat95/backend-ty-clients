@@ -37,6 +37,12 @@ export const CajeroDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{cajeroEntity.plataDeCambio}</dd>
           <dt>
+            <span id="tipo">
+              <Translate contentKey="fidelizacion2App.cajero.tipo">Tipo</Translate>
+            </span>
+          </dt>
+          <dd>{cajeroEntity.tipo}</dd>
+          <dt>
             <span id="estado">
               <Translate contentKey="fidelizacion2App.cajero.estado">Estado</Translate>
             </span>

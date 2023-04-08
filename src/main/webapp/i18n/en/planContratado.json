@@ -1,0 +1,29 @@
+{
+  "fidelizacion2App": {
+    "planContratado": {
+      "home": {
+        "title": "Plan Contratados",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Plan Contratado",
+        "createOrEditLabel": "Create or edit a Plan Contratado",
+        "notFound": "No Plan Contratados found"
+      },
+      "created": "A new Plan Contratado is created with identifier {{ param }}",
+      "updated": "A Plan Contratado is updated with identifier {{ param }}",
+      "deleted": "A Plan Contratado is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plan Contratado {{ id }}?"
+      },
+      "detail": {
+        "title": "Plan Contratado"
+      },
+      "id": "ID",
+      "tiempoContratado": "Tiempo Contratado",
+      "fechaVencimiento": "Fecha Vencimiento",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "plan": "Plan"
+    }
+  }
+}

@@ -64,6 +64,10 @@ export const ClubDetail = (props: RouteComponentProps<{ id: string }>) => {
             <Translate contentKey="fidelizacion2App.club.adminClub">Admin Club</Translate>
           </dt>
           <dd>{clubEntity.adminClub ? clubEntity.adminClub.id : ''}</dd>
+          <dt>
+            <Translate contentKey="fidelizacion2App.club.planContratado">Plan Contratado</Translate>
+          </dt>
+          <dd>{clubEntity.planContratado ? clubEntity.planContratado.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/club" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -40,14 +40,24 @@ public class FormaPago implements Serializable {
 
     @OneToMany(mappedBy = "formaPago")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago", "entregador" }, allowSetters = true)
     private Set<Venta> ventas = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "adminClub", "tipoProductos", "formaPagos", "cajas", "depositos", "trabajadors", "asociadoClubs", "eventos", "productos",
+            "adminClub",
+            "planContratado",
+            "tipoProductos",
+            "formaPagos",
+            "cajas",
+            "depositos",
+            "trabajadors",
+            "asociadoClubs",
+            "eventos",
+            "productos",
+            "mesas",
         },
         allowSetters = true
     )

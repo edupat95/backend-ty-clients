@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20230402180607",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "mesa",
+  "fields": [
+    {
+      "fieldName": "numeroMesa",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Mesa",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "productoMesa",
+      "otherEntityRelationshipName": "mesa",
+      "relationshipName": "productoMesa",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "club",
+      "otherEntityRelationshipName": "mesa",
+      "relationshipName": "club",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

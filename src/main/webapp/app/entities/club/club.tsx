@@ -142,6 +142,9 @@ export const Club = (props: RouteComponentProps<{ url: string }>) => {
                   <th>
                     <Translate contentKey="fidelizacion2App.club.adminClub">Admin Club</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th>
+                    <Translate contentKey="fidelizacion2App.club.planContratado">Plan Contratado</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
@@ -159,6 +162,9 @@ export const Club = (props: RouteComponentProps<{ url: string }>) => {
                     <td>{club.createdDate ? <TextFormat type="date" value={club.createdDate} format={APP_DATE_FORMAT} /> : null}</td>
                     <td>{club.updatedDate ? <TextFormat type="date" value={club.updatedDate} format={APP_DATE_FORMAT} /> : null}</td>
                     <td>{club.adminClub ? <Link to={`/admin-club/${club.adminClub.id}`}>{club.adminClub.id}</Link> : ''}</td>
+                    <td>
+                      {club.planContratado ? <Link to={`/plan-contratado/${club.planContratado.id}`}>{club.planContratado.id}</Link> : ''}
+                    </td>
                     <td className="text-end">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`/club/${club.id}`} color="info" size="sm" data-cy="entityDetailsButton">

@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20230402180609",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "entregador",
+  "fields": [
+    {
+      "fieldName": "estado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Entregador",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "trabajador",
+      "otherEntityRelationshipName": "entregador",
+      "ownerSide": true,
+      "relationshipName": "trabajador",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "entregador",
+      "relationshipName": "venta",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

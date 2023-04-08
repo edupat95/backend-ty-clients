@@ -48,7 +48,7 @@ public class Asociado implements Serializable {
 
     @OneToMany(mappedBy = "asociado")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productoVentas", "cajero", "asociado", "formaPago", "entregador" }, allowSetters = true)
     private Set<Venta> ventas = new HashSet<>();
 
     @OneToMany(mappedBy = "asociado")

@@ -33,14 +33,27 @@ public class TipoProducto implements Serializable {
 
     @OneToMany(mappedBy = "tipoProducto")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productoVentas", "productoCajas", "productoDepositos", "club", "tipoProducto" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "productoVentas", "productoCajas", "productoDepositos", "productoMesas", "club", "tipoProducto" },
+        allowSetters = true
+    )
     private Set<Producto> productos = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "adminClub", "tipoProductos", "formaPagos", "cajas", "depositos", "trabajadors", "asociadoClubs", "eventos", "productos",
+            "adminClub",
+            "planContratado",
+            "tipoProductos",
+            "formaPagos",
+            "cajas",
+            "depositos",
+            "trabajadors",
+            "asociadoClubs",
+            "eventos",
+            "productos",
+            "mesas",
         },
         allowSetters = true
     )

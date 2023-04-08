@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tyclients.tycapp.domain.AsociadoClub;
+import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Registrador;
 import com.tyclients.tycapp.domain.Documento;
 import com.tyclients.tycapp.repository.DocumentoRepository;
+import com.tyclients.tycapp.service.ClubService;
 import com.tyclients.tycapp.service.DocumentoService;
 import com.tyclients.tycapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -45,10 +47,13 @@ public class DocumentoResource {
     private final DocumentoService documentoService;
 
     private final DocumentoRepository documentoRepository;
+    
+    private final ClubService clubService;
 
-    public DocumentoResource(DocumentoService documentoService, DocumentoRepository documentoRepository) {
+    public DocumentoResource(ClubService clubService, DocumentoService documentoService, DocumentoRepository documentoRepository) {
         this.documentoService = documentoService;
         this.documentoRepository = documentoRepository;
+        this.clubService = clubService;
     }
 
     /**
@@ -184,7 +189,7 @@ public class DocumentoResource {
             .build();
     }
     
-    //ASOCIAR CLIENTE A UN CLUB CONM SU DNI
+    //ASOCIAR CLIENTE A UN CLUB CON SU DNI
     @PostMapping("/documentos/create/asociado-club")
     public AsociadoClub RegistradorCreateAsociadoClub(@RequestBody JsonNode jsonNode) throws URISyntaxException {
         log.debug("REST request to save Documento and AsociadoClub with Registrador: {}", jsonNode);
@@ -193,10 +198,13 @@ public class DocumentoResource {
         obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
         Documento documento = obj.convertValue(jsonNode.get("Documento"),Documento.class); 
         Registrador registrador = obj.convertValue(jsonNode.get("Registrador"),Registrador.class);
-        
-        AsociadoClub asociadoClub = documentoService.createAsociadoClubByDoducmento(documento,registrador);
-        return asociadoClub;
-        
+        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class); 
+        Optional<Club> club = clubService.findOne(idClub); 
+        if(club.isPresent()) {
+        	AsociadoClub asociadoClub = documentoService.createAsociadoClubByDoducmento(documento,registrador, club.get());
+        	return asociadoClub;
+        }
+        return null;
         
     }
 }

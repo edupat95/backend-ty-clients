@@ -37,12 +37,6 @@ export const TrabajadorDetail = (props: RouteComponentProps<{ id: string }>) => 
           </dt>
           <dd>{trabajadorEntity.sueldo}</dd>
           <dt>
-            <span id="reputacion">
-              <Translate contentKey="fidelizacion2App.trabajador.reputacion">Reputacion</Translate>
-            </span>
-          </dt>
-          <dd>{trabajadorEntity.reputacion}</dd>
-          <dt>
             <span id="descripcion">
               <Translate contentKey="fidelizacion2App.trabajador.descripcion">Descripcion</Translate>
             </span>

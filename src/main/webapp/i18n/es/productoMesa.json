@@ -1,0 +1,31 @@
+{
+  "fidelizacion2App": {
+    "productoMesa": {
+      "home": {
+        "title": "Producto Mesas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Producto Mesa",
+        "createOrEditLabel": "Crear o editar Producto Mesa",
+        "notFound": "Ningún Producto Mesas encontrado"
+      },
+      "created": "Un nuevo Producto Mesa ha sido creado con el identificador {{ param }}",
+      "updated": "Un Producto Mesa ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Producto Mesa ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Producto Mesa {{ id }}?"
+      },
+      "detail": {
+        "title": "Producto Mesa"
+      },
+      "id": "ID",
+      "costoTotal": "Costo Total",
+      "costoTotalPuntos": "Costo Total Puntos",
+      "cantidad": "Cantidad",
+      "estado": "Estado",
+      "createdDate": "Created Date",
+      "updatedDate": "Updated Date",
+      "mesa": "Mesa",
+      "producto": "Producto"
+    }
+  }
+}

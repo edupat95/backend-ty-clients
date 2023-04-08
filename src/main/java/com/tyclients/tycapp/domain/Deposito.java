@@ -46,7 +46,17 @@ public class Deposito implements Serializable {
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "adminClub", "tipoProductos", "formaPagos", "cajas", "depositos", "trabajadors", "asociadoClubs", "eventos", "productos",
+            "adminClub",
+            "planContratado",
+            "tipoProductos",
+            "formaPagos",
+            "cajas",
+            "depositos",
+            "trabajadors",
+            "asociadoClubs",
+            "eventos",
+            "productos",
+            "mesas",
         },
         allowSetters = true
     )

@@ -1,3 +1,3 @@
-id;sueldo;reputacion;descripcion;fecha_ingreso;estado;created_date;updated_date;user_id;club_id;admin_club_id
-1;32514;11596;Gerente Home;2023-03-03T01:29:20;false;2023-03-02T04:23:53;2023-03-02T11:36:42;1;1;1
-2;2186;52509;payment;2023-03-02T10:16:37;false;2023-03-02T12:05:17;2023-03-02T06:46:42;2;2;2
+id;sueldo;descripcion;fecha_ingreso;estado;created_date;updated_date;user_id;club_id;admin_club_id
+1;32514;functionalities;2023-03-02T05:47:04;true;2023-03-02T11:13:49;2023-03-02T17:58:01;1;1;1
+2;934;HDD;2023-03-02T13:06:40;false;2023-03-02T10:20:32;2023-03-02T12:23:44;2;2;2

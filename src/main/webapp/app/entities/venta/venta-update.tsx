@@ -14,6 +14,8 @@ import { IAsociado } from 'app/shared/model/asociado.model';
 import { getEntities as getAsociados } from 'app/entities/asociado/asociado.reducer';
 import { IFormaPago } from 'app/shared/model/forma-pago.model';
 import { getEntities as getFormaPagos } from 'app/entities/forma-pago/forma-pago.reducer';
+import { IEntregador } from 'app/shared/model/entregador.model';
+import { getEntities as getEntregadors } from 'app/entities/entregador/entregador.reducer';
 import { IVenta } from 'app/shared/model/venta.model';
 import { getEntity, updateEntity, createEntity, reset } from './venta.reducer';
 
@@ -25,6 +27,7 @@ export const VentaUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const cajeros = useAppSelector(state => state.cajero.entities);
   const asociados = useAppSelector(state => state.asociado.entities);
   const formaPagos = useAppSelector(state => state.formaPago.entities);
+  const entregadors = useAppSelector(state => state.entregador.entities);
   const ventaEntity = useAppSelector(state => state.venta.entity);
   const loading = useAppSelector(state => state.venta.loading);
   const updating = useAppSelector(state => state.venta.updating);
@@ -41,6 +44,7 @@ export const VentaUpdate = (props: RouteComponentProps<{ id: string }>) => {
     dispatch(getCajeros({}));
     dispatch(getAsociados({}));
     dispatch(getFormaPagos({}));
+    dispatch(getEntregadors({}));
   }, []);
 
   useEffect(() => {
@@ -59,6 +63,7 @@ export const VentaUpdate = (props: RouteComponentProps<{ id: string }>) => {
       cajero: cajeros.find(it => it.id.toString() === values.cajero.toString()),
       asociado: asociados.find(it => it.id.toString() === values.asociado.toString()),
       formaPago: formaPagos.find(it => it.id.toString() === values.formaPago.toString()),
+      entregador: entregadors.find(it => it.id.toString() === values.entregador.toString()),
     };
 
     if (isNew) {
@@ -81,6 +86,7 @@ export const VentaUpdate = (props: RouteComponentProps<{ id: string }>) => {
           cajero: ventaEntity?.cajero?.id,
           asociado: ventaEntity?.asociado?.id,
           formaPago: ventaEntity?.formaPago?.id,
+          entregador: ventaEntity?.entregador?.id,
         };
 
   return (
@@ -210,6 +216,22 @@ export const VentaUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {formaPagos
                   ? formaPagos.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="venta-entregador"
+                name="entregador"
+                data-cy="entregador"
+                label={translate('fidelizacion2App.venta.entregador')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {entregadors
+                  ? entregadors.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

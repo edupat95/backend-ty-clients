@@ -27,9 +27,6 @@ public class Trabajador implements Serializable {
     @Column(name = "sueldo")
     private Long sueldo;
 
-    @Column(name = "reputacion")
-    private Long reputacion;
-
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -56,7 +53,17 @@ public class Trabajador implements Serializable {
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "adminClub", "tipoProductos", "formaPagos", "cajas", "depositos", "trabajadors", "asociadoClubs", "eventos", "productos",
+            "adminClub",
+            "planContratado",
+            "tipoProductos",
+            "formaPagos",
+            "cajas",
+            "depositos",
+            "trabajadors",
+            "asociadoClubs",
+            "eventos",
+            "productos",
+            "mesas",
         },
         allowSetters = true
     )
@@ -93,19 +100,6 @@ public class Trabajador implements Serializable {
 
     public void setSueldo(Long sueldo) {
         this.sueldo = sueldo;
-    }
-
-    public Long getReputacion() {
-        return this.reputacion;
-    }
-
-    public Trabajador reputacion(Long reputacion) {
-        this.setReputacion(reputacion);
-        return this;
-    }
-
-    public void setReputacion(Long reputacion) {
-        this.reputacion = reputacion;
     }
 
     public String getDescripcion() {
@@ -237,7 +231,6 @@ public class Trabajador implements Serializable {
         return "Trabajador{" +
             "id=" + getId() +
             ", sueldo=" + getSueldo() +
-            ", reputacion=" + getReputacion() +
             ", descripcion='" + getDescripcion() + "'" +
             ", fechaIngreso='" + getFechaIngreso() + "'" +
             ", estado='" + getEstado() + "'" +

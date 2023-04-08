@@ -27,7 +27,8 @@
       "productoVenta": "Producto Venta",
       "cajero": "Cajero",
       "asociado": "Asociado",
-      "formaPago": "Forma Pago"
+      "formaPago": "Forma Pago",
+      "entregador": "Entregador"
     }
   }
 }

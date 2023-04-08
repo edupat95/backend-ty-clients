@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.tyclients.tycapp.IntegrationTest;
 import com.tyclients.tycapp.domain.AdminClub;
 import com.tyclients.tycapp.domain.Club;
+import com.tyclients.tycapp.domain.PlanContratado;
 import com.tyclients.tycapp.repository.ClubRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -87,6 +88,16 @@ class ClubResourceIT {
             adminClub = TestUtil.findAll(em, AdminClub.class).get(0);
         }
         club.setAdminClub(adminClub);
+        // Add required entity
+        PlanContratado planContratado;
+        if (TestUtil.findAll(em, PlanContratado.class).isEmpty()) {
+            planContratado = PlanContratadoResourceIT.createEntity(em);
+            em.persist(planContratado);
+            em.flush();
+        } else {
+            planContratado = TestUtil.findAll(em, PlanContratado.class).get(0);
+        }
+        club.setPlanContratado(planContratado);
         return club;
     }
 
@@ -113,6 +124,16 @@ class ClubResourceIT {
             adminClub = TestUtil.findAll(em, AdminClub.class).get(0);
         }
         club.setAdminClub(adminClub);
+        // Add required entity
+        PlanContratado planContratado;
+        if (TestUtil.findAll(em, PlanContratado.class).isEmpty()) {
+            planContratado = PlanContratadoResourceIT.createUpdatedEntity(em);
+            em.persist(planContratado);
+            em.flush();
+        } else {
+            planContratado = TestUtil.findAll(em, PlanContratado.class).get(0);
+        }
+        club.setPlanContratado(planContratado);
         return club;
     }
 

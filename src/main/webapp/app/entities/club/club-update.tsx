@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IAdminClub } from 'app/shared/model/admin-club.model';
 import { getEntities as getAdminClubs } from 'app/entities/admin-club/admin-club.reducer';
+import { IPlanContratado } from 'app/shared/model/plan-contratado.model';
+import { getEntities as getPlanContratados } from 'app/entities/plan-contratado/plan-contratado.reducer';
 import { IClub } from 'app/shared/model/club.model';
 import { getEntity, updateEntity, createEntity, reset } from './club.reducer';
 
@@ -19,6 +21,7 @@ export const ClubUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const adminClubs = useAppSelector(state => state.adminClub.entities);
+  const planContratados = useAppSelector(state => state.planContratado.entities);
   const clubEntity = useAppSelector(state => state.club.entity);
   const loading = useAppSelector(state => state.club.loading);
   const updating = useAppSelector(state => state.club.updating);
@@ -33,6 +36,7 @@ export const ClubUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getAdminClubs({}));
+    dispatch(getPlanContratados({}));
   }, []);
 
   useEffect(() => {
@@ -49,6 +53,7 @@ export const ClubUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...clubEntity,
       ...values,
       adminClub: adminClubs.find(it => it.id.toString() === values.adminClub.toString()),
+      planContratado: planContratados.find(it => it.id.toString() === values.planContratado.toString()),
     };
 
     if (isNew) {
@@ -69,6 +74,7 @@ export const ClubUpdate = (props: RouteComponentProps<{ id: string }>) => {
           createdDate: convertDateTimeFromServer(clubEntity.createdDate),
           updatedDate: convertDateTimeFromServer(clubEntity.updatedDate),
           adminClub: clubEntity?.adminClub?.id,
+          planContratado: clubEntity?.planContratado?.id,
         };
 
   return (
@@ -148,6 +154,26 @@ export const ClubUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {adminClubs
                   ? adminClubs.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
+              <ValidatedField
+                id="club-planContratado"
+                name="planContratado"
+                data-cy="planContratado"
+                label={translate('fidelizacion2App.club.planContratado')}
+                type="select"
+                required
+              >
+                <option value="" key="0" />
+                {planContratados
+                  ? planContratados.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

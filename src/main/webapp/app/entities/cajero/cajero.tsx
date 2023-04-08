@@ -128,6 +128,9 @@ export const Cajero = (props: RouteComponentProps<{ url: string }>) => {
                     <Translate contentKey="fidelizacion2App.cajero.plataDeCambio">Plata De Cambio</Translate>{' '}
                     <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th className="hand" onClick={sort('tipo')}>
+                    <Translate contentKey="fidelizacion2App.cajero.tipo">Tipo</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th className="hand" onClick={sort('estado')}>
                     <Translate contentKey="fidelizacion2App.cajero.estado">Estado</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
@@ -155,6 +158,7 @@ export const Cajero = (props: RouteComponentProps<{ url: string }>) => {
                       </Button>
                     </td>
                     <td>{cajero.plataDeCambio}</td>
+                    <td>{cajero.tipo}</td>
                     <td>{cajero.estado ? 'true' : 'false'}</td>
                     <td>{cajero.creadDate ? <TextFormat type="date" value={cajero.creadDate} format={APP_DATE_FORMAT} /> : null}</td>
                     <td>{cajero.updatedDate ? <TextFormat type="date" value={cajero.updatedDate} format={APP_DATE_FORMAT} /> : null}</td>

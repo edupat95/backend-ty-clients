@@ -22,6 +22,11 @@ import Documento from './documento';
 import Acceso from './acceso';
 import FormaPago from './forma-pago';
 import TipoProducto from './tipo-producto';
+import Mesa from './mesa';
+import ProductoMesa from './producto-mesa';
+import Entregador from './entregador';
+import Plan from './plan';
+import PlanContratado from './plan-contratado';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default ({ match }) => {
@@ -49,6 +54,11 @@ export default ({ match }) => {
         <ErrorBoundaryRoute path={`${match.url}acceso`} component={Acceso} />
         <ErrorBoundaryRoute path={`${match.url}forma-pago`} component={FormaPago} />
         <ErrorBoundaryRoute path={`${match.url}tipo-producto`} component={TipoProducto} />
+        <ErrorBoundaryRoute path={`${match.url}mesa`} component={Mesa} />
+        <ErrorBoundaryRoute path={`${match.url}producto-mesa`} component={ProductoMesa} />
+        <ErrorBoundaryRoute path={`${match.url}entregador`} component={Entregador} />
+        <ErrorBoundaryRoute path={`${match.url}plan`} component={Plan} />
+        <ErrorBoundaryRoute path={`${match.url}plan-contratado`} component={PlanContratado} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </Switch>
     </div>

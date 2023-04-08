@@ -1,0 +1,11 @@
+id;numero_plan;descripcion;estado;created_date;updated_date
+1;78741;../fake-data/blob/hipster.txt;true;2023-04-02T15:50:59;2023-04-02T10:56:40
+2;48355;../fake-data/blob/hipster.txt;false;2023-04-02T07:32:00;2023-04-02T16:30:45
+3;87718;../fake-data/blob/hipster.txt;false;2023-04-02T05:06:43;2023-04-01T23:36:37
+4;57708;../fake-data/blob/hipster.txt;true;2023-04-02T12:53:42;2023-04-02T08:05:28
+5;2706;../fake-data/blob/hipster.txt;false;2023-04-02T11:15:35;2023-04-02T07:18:45
+6;70087;../fake-data/blob/hipster.txt;false;2023-04-02T11:55:45;2023-04-02T09:00:24
+7;73235;../fake-data/blob/hipster.txt;true;2023-04-02T13:27:22;2023-04-01T20:22:42
+8;11240;../fake-data/blob/hipster.txt;true;2023-04-02T14:05:44;2023-04-01T19:59:17
+9;71163;../fake-data/blob/hipster.txt;false;2023-04-02T15:06:18;2023-04-02T04:01:25
+10;62531;../fake-data/blob/hipster.txt;true;2023-04-02T13:05:20;2023-04-01T20:59:14
