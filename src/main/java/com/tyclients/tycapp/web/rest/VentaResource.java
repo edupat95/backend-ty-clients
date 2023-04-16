@@ -223,13 +223,13 @@ public class VentaResource {
         return productosVenta;
     }
     
-    //CREAR UNA VENTA DE UNA MESA. ES DECIR CERRAR UNA MESA Y COBRAR.
+    //CREAR UNA VENTA DE UNA MESA. ES DECIR CERRAR UNA MESA PORQUE FUE COBRADA.
     @PostMapping("/ventas/mesa/create")
     public List<ProductoVenta> CashierCreateVentaMesa(@RequestBody JsonNode jsonNode) throws URISyntaxException {
         log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
-        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
+        System.out.println("DATOS RECIBIDOS: " + jsonNode);
         List<ProductoVenta> productosVenta = ventaService.cashierCreateVentaSinIdentificar(jsonNode);
-        System.out.println("AAAAAAALista de productos: " + productosVenta);
+        System.out.println("LISTA DE PRODUCTOS: " + productosVenta);
         if(productosVenta != null) {
         	ObjectMapper obj = new ObjectMapper();
             obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
@@ -245,6 +245,50 @@ public class VentaResource {
         }
         return productosVenta;
     }
+    @PostMapping("/ventas/mesa/create/identificado")
+    public List<ProductoVenta> CashierCreateVentaIdentificado(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+    	log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOS: " + jsonNode);
+        List<ProductoVenta> productosVenta = ventaService.cashierCreateVenta(jsonNode);
+        System.out.println("LISTA DE PRODUCTOS: " + productosVenta);
+        if(productosVenta != null) {
+        	ObjectMapper obj = new ObjectMapper();
+            obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        	Long mesaId = obj.convertValue(jsonNode.get("MesaId"),Long.class);
+        	Optional<Mesa> mesa = mesaService.findOne(mesaId);
+        	if(mesa.isPresent()) {
+        		productoMesaService.deleteByMesa(mesa);
+        	} else {
+                return null;
+        	}
+        } else {
+        	return null;
+        }
+        return productosVenta;
+    }
+    @PostMapping("/ventas/mesa/create/canje")
+    public List<ProductoVenta> CashierCreateCanjeMesa(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOS: " + jsonNode);
+        List<ProductoVenta> productosVenta = ventaService.cashierCreateCanje(jsonNode);
+        System.out.println("LISTA DE PRODUCTOS: " + productosVenta);
+        if(productosVenta != null) {
+        	ObjectMapper obj = new ObjectMapper();
+            obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        	Long mesaId = obj.convertValue(jsonNode.get("MesaId"),Long.class);
+        	Optional<Mesa> mesa = mesaService.findOne(mesaId);
+        	if(mesa.isPresent()) {
+        		productoMesaService.deleteByMesa(mesa);
+        	} else {
+                return null;
+        	}
+        } else {
+        	return null;
+        }
+        return productosVenta;
+    }
+    
+    
     
     //Get ventas de un club especifico
     @GetMapping("/ventas/club/{idClub}")
@@ -267,21 +311,6 @@ public class VentaResource {
         return ventas;
     }
 
-    @PutMapping("/ventas/entregar")
-    public ResponseEntity<Venta> entregarVenta(@RequestBody JsonNode jsonNode) throws URISyntaxException {
-        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
-        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
-    	ObjectMapper obj = new ObjectMapper();
-        obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
-        UUID identificador_ticket = obj.convertValue(jsonNode.get("identificador_ticket"),UUID.class);
-        Long idEntregador = obj.convertValue(jsonNode.get("idEntregador"),Long.class);
-        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class);
-        System.out.println("IDENTIFICADOR RECIBIDO: " + identificador_ticket);
-        System.out.println("idEntregador: " + idEntregador);
-        System.out.println("idClub: " + idClub);
-        
-        return null;
-    }
     @PostMapping("/ventas/buscar")
     public ResponseEntity<Venta> buscarVentaConIdentificador(@RequestBody JsonNode jsonNode) throws URISyntaxException {
         log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
@@ -290,13 +319,23 @@ public class VentaResource {
         obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
         UUID identificador_ticket = obj.convertValue(jsonNode.get("identificador_ticket"),UUID.class);
         Long idEntregador = obj.convertValue(jsonNode.get("idEntregador"),Long.class);
-        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class);
         System.out.println("IDENTIFICADOR RECIBIDO: " + identificador_ticket);
         System.out.println("idEntregador: " + idEntregador);
-        System.out.println("idClub: " + idClub);
         
-        Optional<Venta> venta = ventaService.findByIdentificador(idClub,idEntregador,identificador_ticket);
+        Optional<Venta> venta = ventaService.findByIdentificador(idEntregador,identificador_ticket);
         
         return ResponseUtil.wrapOrNotFound(venta);
+    }
+    @PutMapping("/ventas/entregar")
+    public ResponseEntity<Venta> entregarVenta(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save CachierCreateVenta : {}", jsonNode);
+        System.out.println("DATOS RECIBIDOSSSSSSSSSSSSSSSS" + jsonNode);
+    	ObjectMapper obj = new ObjectMapper();
+        obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        Venta venta= obj.convertValue(jsonNode.get("Venta"),Venta.class);
+        Long idEntregador = obj.convertValue(jsonNode.get("idEntregador"),Long.class);
+        
+        Optional<Venta> ventaNewState = ventaService.entregarVenta(venta,idEntregador);
+        return ResponseUtil.wrapOrNotFound(ventaNewState);
     }
 }

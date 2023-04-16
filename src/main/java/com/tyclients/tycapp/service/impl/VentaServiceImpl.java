@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tyclients.tycapp.repository.ClubRepository;
+import com.tyclients.tycapp.repository.EntregadorRepository;
 import com.tyclients.tycapp.repository.FormaPagoRepository;
 import com.tyclients.tycapp.repository.MesaRepository;
 import com.tyclients.tycapp.repository.ProductoVentaRepository;
@@ -61,8 +62,8 @@ public class VentaServiceImpl implements VentaService {
 
     private final ClubService clubService;
 
-    private final EntregadorService entregadorService;
-    public VentaServiceImpl(EntregadorService entregadorService, ClubService clubService, MesaRepository mesaRepository, FormaPagoRepository formaPagoRepository, ProductoService productoService,ProductoVentaRepository productoVentaRepository, AsociadoClubService asociadoClubService, VentaRepository ventaRepository, ClubRepository clubRepository) {
+    private final EntregadorRepository entregadorRepository;
+    public VentaServiceImpl(EntregadorRepository entregadorRepository, ClubService clubService, MesaRepository mesaRepository, FormaPagoRepository formaPagoRepository, ProductoService productoService,ProductoVentaRepository productoVentaRepository, AsociadoClubService asociadoClubService, VentaRepository ventaRepository, ClubRepository clubRepository) {
         this.ventaRepository = ventaRepository;
         this.clubRepository = clubRepository;
         this.asociadoClubService = asociadoClubService;
@@ -71,7 +72,7 @@ public class VentaServiceImpl implements VentaService {
         this.formaPagoRepository = formaPagoRepository;
         this.mesaRepository = mesaRepository;
         this.clubService = clubService;
-        this.entregadorService = entregadorService;
+        this.entregadorRepository = entregadorRepository;
     }
     @Override
     public Venta save(Venta venta) {
@@ -239,17 +240,14 @@ public class VentaServiceImpl implements VentaService {
         obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
         System.out.println("EL OBJETO RECIBIDO ES: " + jsonNode.toString());
         Venta venta = obj.convertValue(jsonNode.get("Venta"),Venta.class);
-        Long formaPagoId = obj.convertValue(jsonNode.get("FormaPagoId"),Long.class);
-        Optional<FormaPago> formaPago = formaPagoRepository.findById(formaPagoId);
-        System.out.println("VENTAAAAAA QUE RECIVEEE -> " + venta.toString());
-        venta.setFormaPago(formaPago.get());
+        System.out.println("VENTA QUE RECIVEEE -> " + venta.toString());
         venta.setCreatedDate(Instant.now());
         venta.setEntregado(false);
         venta.setIdentificadorTicket(UUID.randomUUID());
         
         Venta ventaResult = this.save(venta);
        
-        System.out.println("OBJETOOOOOOO --->> " + ventaResult.toString());
+        System.out.println("OBJETO --->> " + ventaResult.toString());
         
         List<JsonNode> productos = jsonNode.get("Productos").findParents("id");         
         List<ProductoVenta> productosVenta = new ArrayList<ProductoVenta>();
@@ -300,15 +298,26 @@ public class VentaServiceImpl implements VentaService {
 		return ventas;
 	}
 	@Override
-	public Optional<Venta> findByIdentificador(Long idClub, Long idEntregador, UUID identificador_ticket) {
-		Optional<Club> club = clubService.findOne(idClub);
-        Optional<Entregador> entregador = entregadorService.findOne(idEntregador);
-        if(entregador.get().getTrabajador().getClub() == club.get()) {
-        	Optional<Venta> venta = ventaRepository.findByIdentificadorTicket(identificador_ticket);
-        	return venta;
+	public Optional<Venta> findByIdentificador(Long idEntregador, UUID identificador_ticket) {
+		Optional<Entregador> entregador = entregadorRepository.findById(idEntregador);
+        Optional<Venta> venta = ventaRepository.findByIdentificadorTicket(identificador_ticket);
+       	if(venta.isPresent() && venta.get().getCajero().getTrabajador().getClub() == entregador.get().getTrabajador().getClub()) {
+       		return venta;
         }
-        
         return null;
+	}
+	@Override
+	public Optional<Venta> entregarVenta(Venta venta, Long idEntregador) {
+		//primero verificamos que el club del entregador/barman sea el mismo que el del club enviado.
+		Optional<Venta> ventaResult = ventaRepository.findById(venta.getId());
+		Optional<Entregador> entregador = entregadorRepository.findById(idEntregador);
+		if(entregador.isPresent() && ventaResult.isPresent() && ventaResult.get().getCajero().getTrabajador().getClub() == entregador.get().getTrabajador().getClub()) {
+       		ventaResult.get().setEntregado(true);
+       		ventaResult.get().setEntregador(entregador.get());
+       		ventaRepository.save(ventaResult.get());
+       		return ventaResult;
+        }
+		return null;
 	}
 	
 }

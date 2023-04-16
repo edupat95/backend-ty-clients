@@ -74,6 +74,8 @@ public interface VentaService {
 
 	List<Venta> findByFechaBetweenAndCajeros(Instant fechaDesde, Instant fechaHasta, List<Cajero> cajerosDelClub);
 
-	Optional<Venta> findByIdentificador(Long idClub, Long idEntregador, UUID identificador_ticket);
+	Optional<Venta> findByIdentificador(Long idEntregador, UUID identificador_ticket);
+
+	Optional<Venta> entregarVenta(Venta venta, Long idEntregador);
 
 }
