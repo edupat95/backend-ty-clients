@@ -29,7 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
-
+import java.util.UUID;
 /**
  * REST controller for managing {@link com.tyclients.tycapp.domain.Documento}.
  */
@@ -204,7 +204,27 @@ public class DocumentoResource {
         	AsociadoClub asociadoClub = documentoService.createAsociadoClubByDoducmento(documento,registrador, club.get());
         	return asociadoClub;
         }
-        return null;
+        return null;   
+    }
+    
+    //VINCULAR AL CLIENTE A UN TARJETA
+    @PostMapping("/documentos/link/asociado-club")
+    public AsociadoClub RegistradorLinkAsociadoClub(@RequestBody JsonNode jsonNode) throws URISyntaxException {
+        log.debug("REST request to save Documento and AsociadoClub with Registrador: {}", jsonNode);
         
+        ObjectMapper obj = new ObjectMapper();
+        obj.registerModule(new JavaTimeModule()); // esto es necesario para evitar un error.
+        Documento documento = obj.convertValue(jsonNode.get("Documento"),Documento.class); 
+        Registrador registrador = obj.convertValue(jsonNode.get("Registrador"),Registrador.class);
+        Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class); 
+        UUID identificador = obj.convertValue(jsonNode.get("identificador"), UUID.class);
+        
+        Optional<Club> club = clubService.findOne(idClub);
+        
+        if(club.isPresent()) {
+        	AsociadoClub asociadoClub = documentoService.linkAsociadoClubByDoducmento(documento,registrador, club.get(), identificador);
+        	return asociadoClub;
+        }
+        return null;   
     }
 }

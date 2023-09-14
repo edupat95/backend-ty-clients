@@ -143,6 +143,8 @@ public class DocumentoServiceImpl implements DocumentoService {
         		Optional<AsociadoClub> asociadoClubExist = asociadoClubRepository.findByAsociadoAndClub(asociadoExist.get(), club);
         		if(asociadoClubExist.isPresent()) { //SI EL ASOCIADOCLUB YA EXISTE, LO DEVOLVEMOS
         			//System.out.println("EL ASOCIASDOCLUB EXISTE!!!" + asociadoClubExist.get().toString());
+        			asociadoClubExist.get().setIdentificador(UUID.randomUUID());
+        			asociadoClubRepository.save(asociadoClubExist.get());
         			return asociadoClubExist.get();
         		} else { //EN EL CASO DE QUE NO, LO CREAMOS
         			//System.out.println("EL ASOCIADOCLUB NO EXISTE Y LO CREAMOS.");
@@ -208,5 +210,84 @@ public class DocumentoServiceImpl implements DocumentoService {
 	public Optional<Documento> findByNumeroDni(Long numeroDni) {
 		log.debug("Request to get Documento by numeroDni: {}", numeroDni);
         return documentoRepository.findByNumeroDni(numeroDni);
+	}
+	@Override
+	public AsociadoClub linkAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club,
+			UUID identificador) {
+		
+    	//BUSCO A VER SI EL DOCUMNETO EXISTE
+        Optional<Documento> documentoExist = documentoRepository.findByNumeroDni(documento.getNumeroDni());
+        //BUSCAMOS AL REGISTRADOR
+        Optional<Registrador> resultRegistrador = registradorRepository.findById(registrador.getId()); 
+        
+        if(documentoExist.isPresent()) {
+        	//AsociadoClub asociadoClub = documentoService.createAsociadoClubByDoducmento(documentoExist.get(), registrador);
+        	//System.out.println("EL DOCUMENT EXISTE!!!!!!");
+        	Optional<Asociado> asociadoExist = asociadoRepository.findByDocumento(documentoExist);
+        	if(asociadoExist.isPresent()) {
+        		//System.out.println("EL ASOCIADO EXISTE!!!!!!");
+        		Optional<AsociadoClub> asociadoClubExist = asociadoClubRepository.findByAsociadoAndClub(asociadoExist.get(), club);
+        		if(asociadoClubExist.isPresent()) { //SI EL ASOCIADOCLUB YA EXISTE, LO DEVOLVEMOS
+        			//System.out.println("EL ASOCIASDOCLUB EXISTE!!!" + asociadoClubExist.get().toString());
+        			asociadoClubExist.get().setIdentificador(identificador);
+        			asociadoClubRepository.save(asociadoClubExist.get());
+        			return asociadoClubExist.get();
+        		} else { //EN EL CASO DE QUE NO, LO CREAMOS
+        			//System.out.println("EL ASOCIADOCLUB NO EXISTE Y LO CREAMOS.");
+        			AsociadoClub asociadoClub = new AsociadoClub();
+        			asociadoClub.setIdentificador(identificador);
+        			asociadoClub.setFechaAsociacion(Instant.now());
+        			asociadoClub.setPuntosClub(0L);
+        			asociadoClub.setEstado(true);
+        			asociadoClub.setAsociado(asociadoExist.get());
+        			asociadoClub.setClub(resultRegistrador.get().getTrabajador().getClub());
+        			asociadoClub.setRegistrador(resultRegistrador.get());
+        			AsociadoClub resultAsociadoClub = asociadoClubRepository.save(asociadoClub);
+        			return resultAsociadoClub;
+        		}
+        	} else { // SI EL DOCUMENTO EXISTE PERO EL ASOCIADO NO, CREAMOS EL ASOCIADO Y EL ASOCIADOCLUB
+        		//System.out.println("CREAMOS AL ASOCIADO.");
+        		Asociado asociado = new Asociado();
+        		asociado.setEstado(true);
+        		asociado.setDocumento(documentoExist.get());
+        		Asociado resultAsociado = asociadoRepository.save(asociado);
+        		AsociadoClub asociadoClub = new AsociadoClub();
+        		asociadoClub.setIdentificador(identificador);
+        		asociadoClub.setFechaAsociacion(Instant.now());
+        		asociadoClub.setPuntosClub(0L);
+        		asociadoClub.setEstado(true);
+        		asociadoClub.setAsociado(resultAsociado);
+        		asociadoClub.setClub(resultRegistrador.get().getTrabajador().getClub());
+        		asociadoClub.setRegistrador(resultRegistrador.get());
+        		AsociadoClub resultAsociadoClub = asociadoClubRepository.save(asociadoClub);
+        		return resultAsociadoClub;
+        	}
+        } else { //SI EL DOCUMENTO NO EXITE TENEMOS QUE CREAR DOCUMENTO, ASOCIADO Y ASOCIADO CLUB
+        	//System.out.println("CREAMOS TODO.");
+        	try {
+        		// Crear un documento
+        		Documento resultDocumento = documentoRepository.save(documento);
+        		
+        		// crear un Asociado
+        		Asociado asociado = new Asociado();
+        		asociado.setEstado(true);
+        		asociado.setDocumento(resultDocumento);
+        		Asociado resultAsociado = asociadoRepository.save(asociado);
+        		// crear un AsociadoClub
+        		AsociadoClub asociadoClub = new AsociadoClub();
+        		asociadoClub.setIdentificador(identificador);
+        		asociadoClub.setFechaAsociacion(Instant.now());
+        		asociadoClub.setPuntosClub(0L);
+        		asociadoClub.setEstado(true);
+        		asociadoClub.setAsociado(resultAsociado);
+        		asociadoClub.setClub(resultRegistrador.get().getTrabajador().getClub());
+        		asociadoClub.setRegistrador(resultRegistrador.get());
+        		AsociadoClub resultAsociadoClub = asociadoClubRepository.save(asociadoClub);
+        		return resultAsociadoClub;
+        	} catch(IOException e) {
+        		System.out.println("ERROR AL INTENTAR ASOCIADR UN CLIENTE CON DOCUMENTO Y REGISTRADOR");
+        		return null;
+        	}
+        }
 	}
 }

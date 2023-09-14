@@ -5,6 +5,8 @@ import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Registrador;
 import com.tyclients.tycapp.domain.Documento;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -62,4 +64,8 @@ public interface DocumentoService {
     AsociadoClub createAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club);
 
 	Optional<Documento> findByNumeroDni(Long numeroDni);
+
+	AsociadoClub linkAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club,
+			UUID identificador);
+
 }
