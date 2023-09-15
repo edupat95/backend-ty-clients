@@ -1,5 +1,6 @@
 package com.tyclients.tycapp.repository;
 
+import com.tyclients.tycapp.domain.Asociado;
 import com.tyclients.tycapp.domain.Cajero;
 import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Entregador;
@@ -23,5 +24,8 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
 	Optional<List<Venta>> findByCreatedDateBetweenAndCajero(Instant fechaDesde, Instant fechaHasta, Cajero cajero);
 
 	Optional<Venta> findByIdentificadorTicket(UUID identificador_ticket);
+
+
+	List<Venta> findByAsociadoAndCreatedDateAfterAndEntregado(Asociado asociado, Instant minusSeconds, boolean entregado);
 	
 }

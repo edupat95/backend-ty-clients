@@ -104,4 +104,10 @@ public class AsociadoClubServiceImpl implements AsociadoClubService {
 		log.debug("Request to get AsociadoClub : {}", idAsociado);
         return asociadoClubRepository.findByAsociado(idAsociado);
 	}
+
+	@Override
+	public Optional<AsociadoClub> findByIdentificadorAndClub(UUID identificador, Club club) {
+		// TODO Auto-generated method stub
+		return asociadoClubRepository.findByIdentificadorAndClub(identificador, club);
+	}
 }

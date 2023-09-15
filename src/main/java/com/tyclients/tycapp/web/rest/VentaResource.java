@@ -3,12 +3,18 @@ package com.tyclients.tycapp.web.rest;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.tyclients.tycapp.domain.Asociado;
+import com.tyclients.tycapp.domain.AsociadoClub;
 import com.tyclients.tycapp.domain.Cajero;
+import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.Mesa;
 import com.tyclients.tycapp.domain.ProductoVenta;
 import com.tyclients.tycapp.domain.Venta;
 import com.tyclients.tycapp.repository.VentaRepository;
+import com.tyclients.tycapp.service.AsociadoClubService;
+import com.tyclients.tycapp.service.AsociadoService;
 import com.tyclients.tycapp.service.CajeroService;
+import com.tyclients.tycapp.service.ClubService;
 import com.tyclients.tycapp.service.MesaService;
 import com.tyclients.tycapp.service.ProductoMesaService;
 import com.tyclients.tycapp.service.VentaService;
@@ -61,12 +67,21 @@ public class VentaResource {
     
     private final ProductoMesaService productoMesaService;
     
-    public VentaResource(ProductoMesaService productoMesaService, MesaService mesaService, VentaService ventaService, VentaRepository ventaRepository, CajeroService cajeroService) {
+    private final AsociadoClubService asociadoClubService;
+    
+    private final AsociadoService asociadoService;
+    
+    private final ClubService clubService;
+    
+    public VentaResource(ClubService clubService, AsociadoService asociadoService, AsociadoClubService asociadoClubService, ProductoMesaService productoMesaService, MesaService mesaService, VentaService ventaService, VentaRepository ventaRepository, CajeroService cajeroService) {
         this.ventaService = ventaService;
         this.ventaRepository = ventaRepository;
         this.cajeroService = cajeroService;
         this.mesaService = mesaService;
         this.productoMesaService = productoMesaService;
+        this.asociadoClubService = asociadoClubService;
+        this.asociadoService = asociadoService;
+        this.clubService = clubService; 
     }
 
     /**
@@ -338,4 +353,26 @@ public class VentaResource {
         Optional<Venta> ventaNewState = ventaService.entregarVenta(venta,idEntregador);
         return ResponseUtil.wrapOrNotFound(ventaNewState);
     }
+    
+    //BUSCAR LAS VENTAS SIN ENTREGAR QUE TIENE UN CLIENTE EN UN CLUB ESPECIFICO
+    @GetMapping("/ventas/club/{idClub}/identificador_asociado_club/{identificador_asociado_club}")
+    public List<Venta> getVentasByClubAndIdentificador(@PathVariable Long idClub,@PathVariable UUID identificador_asociado_club) {
+        log.debug("REST request to get ventas by Club And Identificador : {}", idClub, identificador_asociado_club);
+        
+        Optional<Club> club = clubService.findOne(idClub);
+                
+        if(club.isPresent()) {
+        	Optional<AsociadoClub> asociadoClub = asociadoClubService.findByIdentificadorAndClub(identificador_asociado_club, club.get());
+        	if(asociadoClub.isPresent()) {
+            	Optional<Asociado> asociado = asociadoService.findOne(asociadoClub.get().getAsociado().getId());
+            	if(asociado.isPresent()) {
+            		List<Venta> ventasSinEntregar = ventaService.findByAsociadoAndClub(asociado.get(), club.get()); 
+            		return ventasSinEntregar;
+            	}
+        	}
+        }
+        
+        return null;
+    }
+
 }

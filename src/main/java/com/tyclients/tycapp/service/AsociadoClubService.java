@@ -63,4 +63,7 @@ public interface AsociadoClubService {
     Optional<AsociadoClub> findAllByIdClubAndIdentificador(Optional<Club> club, UUID identificador);
 	
 	Optional<AsociadoClub> findByIdAsociado(Asociado idAsociado);
+
+	Optional<AsociadoClub> findByIdentificadorAndClub(UUID identificador, Club club);
+
 }

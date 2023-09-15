@@ -1,7 +1,9 @@
 package com.tyclients.tycapp.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.tyclients.tycapp.domain.Asociado;
 import com.tyclients.tycapp.domain.Cajero;
+import com.tyclients.tycapp.domain.Club;
 import com.tyclients.tycapp.domain.ProductoVenta;
 import com.tyclients.tycapp.domain.Venta;
 
@@ -78,4 +80,5 @@ public interface VentaService {
 
 	Optional<Venta> entregarVenta(Venta venta, Long idEntregador);
 
+	List<Venta> findByAsociadoAndClub(Asociado asociado, Club club);
 }

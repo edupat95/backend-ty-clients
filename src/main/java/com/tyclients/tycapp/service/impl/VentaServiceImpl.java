@@ -11,6 +11,7 @@ import com.tyclients.tycapp.repository.ProductoVentaRepository;
 import com.tyclients.tycapp.service.AsociadoClubService;
 import com.tyclients.tycapp.service.ClubService;
 import com.tyclients.tycapp.service.ProductoService;
+import com.tyclients.tycapp.domain.Asociado;
 import com.tyclients.tycapp.domain.AsociadoClub;
 import com.tyclients.tycapp.domain.Cajero;
 import com.tyclients.tycapp.domain.Club;
@@ -25,10 +26,12 @@ import com.tyclients.tycapp.service.VentaService;
 import com.tyclients.tycapp.service.EntregadorService;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -318,6 +321,18 @@ public class VentaServiceImpl implements VentaService {
        		return ventaResult;
         }
 		return null;
+	}
+	@Override
+	public List<Venta> findByAsociadoAndClub(Asociado asociado, Club club) {
+		// TODO Auto-generated method stub
+		List<Venta> ventasDelAsociado = ventaRepository.findByAsociadoAndCreatedDateAfterAndEntregado(asociado, Instant.now().minusSeconds(172800), false);
+		
+		List<Venta> ventasDelClubEspecifico = ventasDelAsociado.stream()
+	            .filter(venta -> venta.getCajero() != null && venta.getCajero().getTrabajador() != null
+	                    && venta.getCajero().getTrabajador().getClub().equals(club))
+	            .collect(Collectors.toList());
+		
+		return ventasDelClubEspecifico;
 	}
 	
 }
