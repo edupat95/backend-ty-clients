@@ -214,7 +214,11 @@ public class DocumentoServiceImpl implements DocumentoService {
 	@Override
 	public AsociadoClub linkAsociadoClubByDoducmento(Documento documento, Registrador registrador, Club club,
 			UUID identificador) {
-		
+		//Buscamos a un asociado por el idenfiticador, si existe retornamos un error
+		/*Optional<AsociadoClub> asociadoClubIdentificadorExist = asociadoClubRepository.findByIdentificador(identificador);
+		if(asociadoClubIdentificadorExist.isPresent()) {
+			return null;
+		}*/
     	//BUSCO A VER SI EL DOCUMNETO EXISTE
         Optional<Documento> documentoExist = documentoRepository.findByNumeroDni(documento.getNumeroDni());
         //BUSCAMOS AL REGISTRADOR

@@ -219,6 +219,7 @@ public class DocumentoResource {
         Long idClub = obj.convertValue(jsonNode.get("idClub"),Long.class); 
         UUID identificador = obj.convertValue(jsonNode.get("identificador"), UUID.class);
         
+        
         Optional<Club> club = clubService.findOne(idClub);
         
         if(club.isPresent()) {
